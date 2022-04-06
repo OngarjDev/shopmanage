@@ -116,24 +116,23 @@ const Charttransfer = new Chart(ctxtransfer, {
         labels: ['ช่องทางธนาคาร', 'ช่องทางรับเงินสด'],
         datasets: [{
             label: 'ช่องทางชำระเงิน',
-            data: [12, 19, 3, 5, 2, 3, 9],
+            <?php
+                    require_once('../php_action/dbconnect.php');
+                    $sql_bank = "SELECT * FROM history WHERE transfer_history = 'bank'";
+                    $result_bank = $con->query($sql_bank);
+                    $row_numbank = $result_bank->num_rows;
+                    $sql_cash = "SELECT * FROM history WHERE transfer_history = 'cash'";
+                    $result_cash = $con->query($sql_cash);
+                    $row_numcash= $result_cash->num_rows;
+            ?>
+            data: ['<?php echo $row_numbank?>', '<?php echo $row_numcash?>'],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
             ],
             borderColor: [
                 'rgba(255, 99, 132, 1)',
                 'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(153, 102, 255, 1)'
             ],
             borderWidth: 1
         }]

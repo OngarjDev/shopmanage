@@ -72,7 +72,7 @@
     </div>
     <script src="../node_modules/chart.js/dist/chart.js"></script>
     <script>
-    <?php require_once('../js/chart/marketing.js')?>
+        <?php require_once('../js/chart/marketing.php') ?>
     </script>
     <?php include('../php_action/scripts.php') ?>
 </body>
