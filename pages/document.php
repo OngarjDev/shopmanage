@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>HOME/หน้าหลัก</title>
+    <?php
+    require('../php_action/check.php');
+    include('../php_action/bootstrap.php');
+    ?>
+</head>
+
+<body class="sb-nav-fixed">
+    <?php
+    include('../layout/nav.html');
+    include('../layout/menu.html');
+    ?>
+    <div id="layoutSidenav_content">
+        <main>
+            <h3 class="text-center mt-3">คู่มือการใช้งาน เวอร์ชั่น 1.0 (ภาษาไทย)</h3>
+            <div class="card mx-auto w-50">
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-6">
+                                
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </main>
+    </div>
+    </div>
+    <?php include('../php_action/scripts.php') ?>
+</body>
+
+</html>
