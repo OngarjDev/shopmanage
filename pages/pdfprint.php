@@ -43,6 +43,7 @@ $fname = $row['fname_staff'];
 $lname = $row['lname_staff'];
 $number = $row['number_staff'];
 $date = $row['datetime_history'];
+$datetime = explode('.',$date);
 $income = $row['income_history'];
 if ($transfer == 'bank') {
     $tran = 'ธนาคาร';
@@ -52,7 +53,7 @@ if ($transfer == 'cash') {
 }
 $content = <<<END
     <p>ชื่อพนักงาน  : $fname    $lname       รหัสพนักงาน :  $number </p>
-    <p>วัน-เวลาที่ซื้อสินค้า :  $date</p>
+    <p>วัน-เวลาที่ซื้อสินค้า :  $datetime[0]</p>
     <p>เลขที่ใบชำระเงิน :  $id_history </p>
     <p>ช่องทางการชำระเงิน :  $tran</p>
 END;

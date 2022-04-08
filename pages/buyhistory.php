@@ -79,8 +79,9 @@
                                             </p>
                                             <?php
                                             $datetime = explode(" ", $row['datetime_history']);
+                                            $time =  explode(".", $datetime[1]);
                                             ?>
-                                            <p class="card-text"><small class="text-muted">วันที่ซื้อสินค้า : <?= $datetime[0] ?><br>เวลาที่ซื้อสินค้า : <?= $datetime[1] ?> (เวลา ประเทศไทย)<br>รหัสกำกับใบชำระเงิน : <?= $row['pin_history'] ?></small></p>
+                                            <p class="card-text"><small class="text-muted">วันที่ซื้อสินค้า : <?= $datetime[0] ?><br>เวลาที่ซื้อสินค้า : <?= $time[0] ?> (เวลา ประเทศไทย)<br>รหัสกำกับใบชำระเงิน : <?= $row['pin_history'] ?></small></p>
                                             <?php if ($row['image_history'] == 0 && $row['transfer_history'] != 'cash') { ?>
                                                 <div class="btn-group w-100" role="group" aria-label="Basic example">
                                                     <button type="button" onclick="window.location.href = 'pdfprint.php?noworder=<?php echo $row['id_history'] ?>&transfer=<?php echo $row['transfer_history'] ?>'" class="btn btn-primary">ตราจสอบใบเสร็จ</button>

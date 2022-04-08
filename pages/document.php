@@ -20,13 +20,16 @@
             <div class="card mx-auto w-50">
                 <div class="card-body">
                     <div class="container">
-                        <div class="row">
+                        <div class="row text-center">
                             <div class="col-xl-6 col-lg-6 col-md-6">
-                                
+                                <h6>แบบออนไลน์(ใหม่ล่าสุดและทันสมัย)</h6>
+                                <a href="" class="text-decoration-none">สำหรับ การใช้งานระบบ</a>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6">
-
+                                <h6>แบบออฟไลน์(ไม่แนะนำ)</h6>
+                                <a href="" class="text-decoration-none">สำหรับ การใช้งานระบบ</a>
                             </div>
+                            <p class="mt-5 text-secondary">สำหรับคู่มือการติดตั้งระบบ สามารถดูได้ที่โฟล์เดอร์ Documentที่ติดมา กับระบบ</p>
                         </div>
                     </div>
                 </div>
