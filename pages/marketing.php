@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>HOME/หน้าหลัก</title>
+    <title>การตลาด</title>
     <?php
     require('../php_action/check.php');
     include('../php_action/bootstrap.php');

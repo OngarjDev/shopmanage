@@ -87,7 +87,7 @@
                 }
                 xmlhttp.open("POST", "../php_action/editprofile.php");
                 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xmlhttp.send("action=resetpassword&data=" + pass2 + "&id_staff" + <?= $id_staff ?>);
+                xmlhttp.send("action=resetpassword&data=" + pass2 + "&id_staff=" + <?= $id_staff ?>);
             } else {
                 alert('รหัสผ่านไม่ตรงกัน,ไม่อนุญาติให้ใช้รหัสผ่านนี้');
                 return false;
