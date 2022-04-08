@@ -31,39 +31,24 @@
                     <div class="col-xl-1 col-lg-1 col-md-1"></div>
                 </div>
                 <div class="row mt-3 mb-4 h-75">
-
-                    <div class="col-xl-3 col-lg-3 col-md-4">
-                        <div class="card">
-                            <div class="card-header">
-                                สินค้ายอดนิยม
-                            </div>
-                            <canvas id="top10" style="position: relative; height:100vh; width:100vh"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4">
-                        <div class="card">
-                            <div class="card-header">
-                                กลุ่มสินค้าที่(ขายได้มากที่สุด ต่อชิ้น)
-                            </div>
-                            <canvas id="group" style="position: relative; height:100vh; width:100vh"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4">
+                    <div class="col-xl-1 col-lg-1 col-md-1"></div>
+                    <div class="col-xl-5 col-lg-5 col-md-5">
                         <div class="card">
                             <div class="card-header">
                                 ช่องทางการชำระเงิน(รวมทั้งหมดที่เก็บได้)
                             </div>
-                            <canvas id="transfer" style="position: relative; height:100vh; width:100vh"></canvas>
+                            <canvas id="transfer" style="position: relative; height:65vh; width:100vh"></canvas>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4">
+                    <div class="col-xl-5 col-lg-5 col-md-4">
                         <div class="card">
                             <div class="card-header">
-                                พนักงาน(ทำรายการมากที่สุด)
+                                พนักงาน
                             </div>
-                            <canvas id="staffs" style="position: relative; height:100vh; width:100vh"></canvas>
+                            <canvas id="staffs" style="position: relative; height:65vh; width:100vh"></canvas>
                         </div>
                     </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1"></div>
                 </div>
             </div>
     </div>

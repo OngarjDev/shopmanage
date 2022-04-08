@@ -4,7 +4,7 @@ const charprofit = new Chart(ctxprofit, {
     data: {
         datasets: [{
             type: 'line',
-            label: 'จำนวนเงินที่ขายได้',
+            label: 'ยอดรายได้รวม',
                 <?php
                     $year = date('Y');
                     require_once('../php_action/dbconnect.php');
@@ -88,94 +88,6 @@ const charprofit = new Chart(ctxprofit, {
     }
 });
 
-const ctxtop10 = document.getElementById('top10');
-const Charttop10 = new Chart(ctxtop10, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange', 'Green'],
-        datasets: [{
-            label: 'สินค้าที่ขายได้มากที่สุด10อันดับแรก',
-            data: [12, 19, 3, 5, 2, 3, 9],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(153, 102, 255, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-    indexAxis: 'y',
-        scales: {
-            y: {
-                ticks: {
-                    crossAlign: 'far',
-                }
-            }
-        }
-    }
-});
-
-
-
-const group = document.getElementById('group');
-const Chartgroup = new Chart(group, {
-    type: 'doughnut',
-    data: {
-        <?php
-            
-        ?>
-        labels: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
-        datasets: [{
-            label: 'ยอดการทำรายการในแต่ละเดือน',
-            data: [
-                <?php
-
-                ?>
-                ],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(153, 102, 255, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-
 const ctxtransfer = document.getElementById('transfer');
 const Charttransfer = new Chart(ctxtransfer, {
     type: 'bar',
@@ -219,14 +131,28 @@ const Chartstaff = new Chart(ctxstaff, {
     type: 'bar',
     data: {
         <?php
-        $sql = "SELECT * FROM staff INNER JOIN history ON staff.staff_id = history.staff_id";
-        $result = $con->query($sql);
-        // while($row = $result->num)    
+            require_once('../php_action/dbconnect.php');
+            $sql = "SELECT * FROM staff";
+            $result = $con->query($sql);
+            $name_staff = array();
+            $id_staff = array();
+            while($row = $result->fetch_assoc()){
+                array_push($name_staff, $row['fname_staff']);
+                array_push($id_staff, $row['id_staff']);
+            }
+            $num_staff = count($id_staff); 
+
+            $num_history = array();
+            for ($i=0; $i < $num_staff; $i++) { 
+                $sql = "SELECT * FROM history WHERE id_staff = '$id_staff[$i]'";
+                $result = $con->query($sql);
+                array_push($num_history, $result->num_rows);
+            }
         ?>
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+        labels: [<?php foreach($name_staff as $value){ echo '"'.$value.'"'.',';}?>],
         datasets: [{
             label: 'ยอดการทำรายการ รวมทั้งหมด',
-            data: [12, 19, 3, 5, 2],
+            data: [<?php foreach($num_history as $value){ echo $value.',';}?>],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',

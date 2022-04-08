@@ -14,16 +14,17 @@
         ?>
             <div id="layoutSidenav_content">
                 <main>
-                    
-                </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; ongarjdev.000webhostapp.com</div>
-                            <a href="#">เงื่อนไขการใช้งาน</a>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-1 col-lg-1 col-md-1"></div>
+                            <div class="col-xl-10 col-lg-10 col-md-10">
+                                <h1 class="text-center mt-2">ยินดีต้อนรับ <?php echo $name_staff?></h1>
+                                
+                            </div>
+                            <div class="col-xl-1 col-lg-1 col-md-1"></div>
                         </div>
                     </div>
-                </footer>
+                </main>
             </div>
         </div>
         <?php include('../php_action/scripts.php')?>
