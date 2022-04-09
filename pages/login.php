@@ -23,7 +23,7 @@
                         $result = $con->query($sql);
                         while ($row = $result->fetch_assoc()) {
                         ?>
-                    <div class="card mt-2 bg-light">
+                    <div class="card mt-2 bg-light border-primary">
                         <div class="card-header">
                             <h5 class="card-title">
                                 หัวข้อ :
@@ -32,13 +32,6 @@
                         </div>
                         <div class="card-body">
                             <p class="card-text">รายละเอียด : <?php echo $row['content_News']; ?></p>
-                            <?php
-                            if ($row['major_News'] == '1') {
-                                echo "<div class='text-success'>(สำคัญ)</div>";
-                            } else {
-                                echo "<div class='text-danger'>(ทั่วไป)</div>";
-                            }
-                            ?>
                             <p class="mt-2 mb-0">ลงวันที่-เวลา : <?php echo $row['datetime_News']; ?></p>
                         </div>
                     </div>
@@ -52,7 +45,19 @@
                         <label for="" class="form-label">รหัสผ่านพนักงาน</label>
                         <input type="password" class="form-control" name="password" placeholder="รหัสผ่านของคุณ" required>
                         <input type="hidden" name="form" value="login">
-                        <input type="submit" class="btn btn-success mt-2" value="เข้าสู่ระบบ">
+                        <input type="submit" class="btn btn-success mt-2 w-100" value="เข้าสู่ระบบ">
+                        <?php if (isset($_GET['error'])) { ?>
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert" id="alert">
+                                <strong>เกิดข้อผิดพลาด!</strong> <?= $_GET['error']?>
+                                <button type="button" class="btn-close" onclick="hiddenalert()"></button>
+                            </div>
+                        <?php } ?>
+                        <?php if (isset($_GET['info'])) { ?>
+                            <div class="alert alert-info alert-dismissible fade show mt-3" role="alert" id="alert">
+                                <strong>ข้อความจากระบบ!</strong> <?= $_GET['info']?>
+                                <button type="button" class="btn-close" onclick="hiddenalert()"></button>
+                            </div>
+                        <?php } ?>
                     </form>
                 </div>
             </div>
@@ -65,9 +70,24 @@
             document.getElementById('time').innerHTML = time;
         }
         setInterval(datetime, 1000);
+        function hiddenalert(){
+            document.getElementById('alert').setAttribute('hidden','true');
+        }
     </script>
     <?php
     session_start();
+    require_once('../php_action/dbconnect.php');
+    $sql = "UPDATE staff SET login_staff = '0' WHERE id_staff = '" . $_SESSION['id_staff'] . "'";
+    $result = $con->query($sql);
+    
+    $sql = "SELECT * FROM note WHERE id_staff = '" . $_SESSION['id_staff'] . "' AND type_note = 'login'";
+    $result = $con->query($sql);
+    $row = $result->fetch_assoc();
+
+    date_default_timezone_set('Asia/Bangkok');
+    $date_logout = $row['datetime_note'] . '//' . date("Y-m-d h:i:s");
+    $sql = "UPDATE note SET type_note = 'logout',content_note = '$date_logout' WHERE id_staff = '" . $_SESSION['id_staff'] . "'";
+    $result = $con->query($sql);
     session_destroy();
     ?>
 </body>

@@ -27,7 +27,15 @@
                                     <div class="card mb-3">
                                         <div class="card-header  text-white bg-success">จำนวนรายการที่คุณทำตลอด 1 เดือน</div>
                                         <div class="card-body bg-light">
-                                            <h5 class="card-title">ในเดือนนี้คุณทำรายการไป รายการ</h5>
+                                            <?php
+                                            require_once('../php_action/dbconnect.php');
+                                            $year = date('Y');
+                                            $month = date('m');
+                                            $sql = "SELECT * FROM history WHERE id_staff = '$id_staff' AND (datetime_history BETWEEN '$year-$month-01' AND '$year-$month-31')";
+                                            $result = $con->query($sql);
+                                            $count = $result->num_rows;
+                                            ?>
+                                            <h5 class="card-title">ในเดือนนี้คุณทำรายการไป <?= $count ?> รายการ</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -36,7 +44,15 @@
                                     <div class="card mb-3">
                                         <div class="card-header text-white bg-success">จำนวนการเข้าทำงานตลอด 1 เดือน</div>
                                         <div class="card-body bg-light">
-                                            <h5 class="card-title">ในเดือนนี้คุณทำเข้างานไป ครั้ง</h5>
+                                        <?php
+                                            require_once('../php_action/dbconnect.php');
+                                            $year = date('Y');
+                                            $month = date('m');
+                                            $sql = "SELECT * FROM note WHERE id_staff = '$id_staff'AND type_note = 'logout' AND (datetime_note BETWEEN '$year-$month-01' AND '$year-$month-31')";
+                                            $result = $con->query($sql);
+                                            $count = $result->num_rows;
+                                        ?>
+                                            <h5 class="card-title">ในเดือนนี้คุณเข้าสู่ระบบ <?= $count ?> ครั้ง</h5>
                                         </div>
                                     </div>
                                 </div>

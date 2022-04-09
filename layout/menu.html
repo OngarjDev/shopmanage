@@ -23,6 +23,7 @@
                             class="me-2" width="25">
                         รายละเอียดตัวสินค้า
                     </a>
+                    <?php if($_SESSION['admin'] == '1'){?>
                     <div class="sb-sidenav-menu-heading">ส่วนผู้จัดการร้านค้า</div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#staff"
                         aria-expanded="false" aria-controls="staff">
@@ -63,7 +64,7 @@
                         บันทึก
                         <div class="sb-sidenav-collapse-arrow"></div>
                     </a>
-
+                    <?php }?>
                     <div class="sb-sidenav-menu-heading">ช่วยเหลือ</div>
                     <a class="nav-link" href="document.php">
                         <img src="../image/system/icons8-document-50.png" class="me-2" width="25">

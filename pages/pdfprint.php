@@ -1,8 +1,13 @@
 <?php
-session_start();
 require_once('../vendor/tecnickcom/tcpdf/tcpdf.php');
-require('../php_action/check.php');
 require_once('../php_action/dbconnect.php');
+
+session_start();
+if (!isset($_SESSION['id_staff']) || !isset($_SESSION['name_staff'])) {
+    header('location: login.php');
+}
+$id_staff = $_SESSION['id_staff'];
+$name_staff = $_SESSION['name_staff'];
 
 if ($_GET['noworder'] && $_GET['transfer']) {
     $id_history = $_GET['noworder'];
