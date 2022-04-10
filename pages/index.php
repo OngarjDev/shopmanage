@@ -44,14 +44,14 @@
                                     <div class="card mb-3">
                                         <div class="card-header text-white bg-success">จำนวนการเข้าทำงานตลอด 1 เดือน</div>
                                         <div class="card-body bg-light">
-                                        <?php
+                                            <?php
                                             require_once('../php_action/dbconnect.php');
                                             $year = date('Y');
                                             $month = date('m');
                                             $sql = "SELECT * FROM note WHERE id_staff = '$id_staff'AND type_note = 'logout' AND (datetime_note BETWEEN '$year-$month-01' AND '$year-$month-31')";
                                             $result = $con->query($sql);
                                             $count = $result->num_rows;
-                                        ?>
+                                            ?>
                                             <h5 class="card-title">ในเดือนนี้คุณเข้าสู่ระบบ <?= $count ?> ครั้ง</h5>
                                         </div>
                                     </div>
@@ -59,8 +59,19 @@
 
 
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-xl-7 col-lg-7 col-md-7">
+                                    <div class="card">
 
+                                    </div>
+                                </div>
+                                <div class="col-xl-5 col-lg-5 col-md-5">
+                                    <div class="card">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1"></div>
                 </div>
