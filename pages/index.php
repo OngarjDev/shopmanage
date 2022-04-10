@@ -72,7 +72,7 @@
                                             <hr>
                                             <?php
                                             require_once('../php_action/dbconnect.php');
-                                            $sql = "SELECT * FROM history WHERE id_staff = '$id_staff' ORDER BY datetime_history DESC LIMIT 4";
+                                            $sql = "SELECT * FROM history WHERE id_staff = '$id_staff' ORDER BY datetime_history DESC LIMIT 3";
                                             $result = $con->query($sql);
                                             while ($row = $result->fetch_assoc()) {
                                                 $name_item = explode(',', $row['name_item']);
