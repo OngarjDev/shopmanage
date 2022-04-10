@@ -40,9 +40,9 @@
                                 session_start();
                                 if(isset($_SESSION['dataselect'])){
                                     if($_SESSION['dataselect'] == 'historybuy'){
-                                        $sql = "SELECT "
+                                        $sql = "SELECT * FROM history WHERE id_staff = '".$_SESSION['id_staff']."'";
                                     }else if($_SESSION['dataselect'] == 'historyadditem'){
-                                        
+                                        $sql = "SELECT * FROM history"
                                     }else{
 
                                     }
