@@ -34,6 +34,24 @@
                                 </form>
                             </div>
                         </div>
+                        <div class="card mt-2">
+                            <?php
+                                require_once('../php_action/dbconnect.php');
+                                session_start();
+                                if(isset($_SESSION['dataselect'])){
+                                    if($_SESSION['dataselect'] == 'historybuy'){
+                                        $sql = "SELECT "
+                                    }else if($_SESSION['dataselect'] == 'historyadditem'){
+                                        
+                                    }else{
+
+                                    }
+                                }
+                                $result = $con->query($sql);
+                                while($row = $result->fetch_assoc()){
+                            ?>
+                            <?php } ?>
+                        </div>
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1"></div>
                 </div>

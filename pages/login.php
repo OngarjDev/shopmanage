@@ -23,18 +23,15 @@
                         $result = $con->query($sql);
                         while ($row = $result->fetch_assoc()) {
                         ?>
-                    <div class="card mt-2 bg-light border-primary">
-                        <div class="card-header">
-                            <h5 class="card-title">
-                                หัวข้อ :
-                                <?php echo $row['title_News']; ?>
-                            </h5>
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">รายละเอียด : <?php echo $row['content_News']; ?></p>
-                            <p class="mt-2 mb-0">ลงวันที่-เวลา : <?php echo $row['datetime_News']; ?></p>
-                        </div>
+                        <h5 class="card-title">
+                            หัวข้อ :
+                            <?php echo $row['title_News']; ?>
+                        </h5>
+                    <div class="card-body">
+                        <p class="card-text">รายละเอียด : <?php echo $row['content_News']; ?></p>
+                        <p class="mt-2 mb-0">ลงวันที่-เวลา : <?php echo $row['datetime_News']; ?></p>
                     </div>
+                    <hr>
                 <?php } ?>
                 </div>
                 <div class="col-lg-6">
@@ -48,13 +45,13 @@
                         <input type="submit" class="btn btn-success mt-2 w-100" value="เข้าสู่ระบบ">
                         <?php if (isset($_GET['error'])) { ?>
                             <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert" id="alert">
-                                <strong>เกิดข้อผิดพลาด!</strong> <?= $_GET['error']?>
+                                <strong>เกิดข้อผิดพลาด!</strong> <?= $_GET['error'] ?>
                                 <button type="button" class="btn-close" onclick="hiddenalert()"></button>
                             </div>
                         <?php } ?>
                         <?php if (isset($_GET['info'])) { ?>
                             <div class="alert alert-info alert-dismissible fade show mt-3" role="alert" id="alert">
-                                <strong>ข้อความจากระบบ!</strong> <?= $_GET['info']?>
+                                <strong>ข้อความจากระบบ!</strong> <?= $_GET['info'] ?>
                                 <button type="button" class="btn-close" onclick="hiddenalert()"></button>
                             </div>
                         <?php } ?>
@@ -70,8 +67,9 @@
             document.getElementById('time').innerHTML = time;
         }
         setInterval(datetime, 1000);
-        function hiddenalert(){
-            document.getElementById('alert').setAttribute('hidden','true');
+
+        function hiddenalert() {
+            document.getElementById('alert').setAttribute('hidden', 'true');
         }
     </script>
     <?php
@@ -79,7 +77,7 @@
     require_once('../php_action/dbconnect.php');
     $sql = "UPDATE staff SET login_staff = '0' WHERE id_staff = '" . $_SESSION['id_staff'] . "'";
     $result = $con->query($sql);
-    
+
     $sql = "SELECT * FROM note WHERE id_staff = '" . $_SESSION['id_staff'] . "' AND type_note = 'login'";
     $result = $con->query($sql);
     $row = $result->fetch_assoc();

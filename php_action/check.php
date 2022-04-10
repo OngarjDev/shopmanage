@@ -19,5 +19,5 @@ $name_staff = $_SESSION['name_staff'];
         xmlhttp.send();
     }
     window.onload = updatetime();
-    setInterval(checktime,400000);
+    setInterval(checktime,3000000);
 </script>

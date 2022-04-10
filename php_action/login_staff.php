@@ -41,6 +41,12 @@ if (isset($_POST['form']) && $_POST['form'] == 'login') {
                     $sql = "INSERT INTO note(id_staff,content_note,datetime_note,type_note) VALUES('$data_staff[id_staff]',Now(),Now(),'login')";
                     $result = $con->query($sql);
 
+                    $_SESSION['id_staff'] = $data_staff['id_staff'];
+                    $_SESSION['name_staff'] = $data_staff['fname_staff'];
+                    if ($data_staff['admin'] == 1) {
+                        $_SESSION['admin'] = 1;
+                    }
+
                     header('location: ../pages/index.php');
                 } else {
                     header('location: ../pages/login.php?error=พบการลงทะเบียนระบบซ้ำกัน กรุณาติดต่อผู้ดูแลระบบ');
