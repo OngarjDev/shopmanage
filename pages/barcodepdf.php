@@ -1,7 +1,12 @@
 <?php
 session_start();
 require_once('../vendor/tecnickcom/tcpdf/tcpdf.php');
-require('../php_action/check.php');
+
+if (!isset($_SESSION['id_staff']) || !isset($_SESSION['name_staff'])) {
+    header('location: login.php');
+}
+$id_staff = $_SESSION['id_staff'];
+
 require_once('../php_action/dbconnect.php');
 
 $id_item = $con->real_escape_string($_GET['id_item']);

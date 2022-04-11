@@ -40,9 +40,9 @@
                                         <?php } ?>
 
                                         <?php if ($_SESSION['dataselect'] == 'historyadditem') { ?>
-                                            <option value="selectdata" selected>ดูประวัติการเพิ่มสินค้าทั้งหมด</option>
+                                            <option value="historyadditem" selected>ดูประวัติการเพิ่มสินค้าทั้งหมด</option>
                                         <?php } else { ?>
-                                            <option value="selectdata">ดูประวัติการเพิ่มสินค้าทั้งหมด</option>
+                                            <option value="historyadditem">ดูประวัติการเพิ่มสินค้าทั้งหมด</option>
                                         <?php } ?>
                                     </select>
                                     <input type="hidden" name="action" value="selectdata">
@@ -56,21 +56,33 @@
                             $sql = "SELECT * FROM note WHERE id_staff = '" . $_SESSION['id_staff'] . "' AND type_note = 'logout' ORDER BY id_note DESC";
                             if (isset($_SESSION['dataselect'])) {
                                 if ($_SESSION['dataselect'] == 'historybuy') {
-                                    $sql = "SELECT * FROM history WHERE id_staff = '" . $_SESSION['id_staff'] . "' ORDER BY id_note DESC";
+                                    $sql = "SELECT * FROM history WHERE id_staff = '" . $_SESSION['id_staff'] . "' ORDER BY id_history DESC";
                                 } else if ($_SESSION['dataselect'] == 'historyadditem') {
                                     $sql = "SELECT * FROM note WHERE id_staff = '" . $_SESSION['id_staff'] . "' AND type_note = 'additem' ORDER BY id_note DESC";
                                 }
                             }
                             $result = $con->query($sql);
+                            echo $_SESSION['dataselect'];
                             ?>
                             <?php if ($_SESSION['dataselect'] == 'historyadditem' || $_SESSION['dataselect'] == 'login-logoutstaff' || $_SESSION['dataselect'] == null) { ?>
                                 <?php //รอแยก เข้า ออก กับ เพิ่มสินค้า ?>
+                                $result = $con->query($sql);
+                                <h3>historyadditem</h3>
                             <?php
                             } 
-                            elseif ($_SESSION['dataselect'] == 'historybuy') {
-                                while ($row = $result->fetch_assoc()) {
+                            else if ($_SESSION['dataselect'] == 'historybuy') {
+                                $result = $con->query($sql)or die("dasdadad");
+                                while ($row_historybuy = $result->fetch_assoc()) {
+                                    echo $result->num_rows;
+
+                                    print_r($row);
+                                    echo "TEST";
+                                    $name_all = explode(',', $row_historybuy['name_history']);
+                                    $price_all = explode(',', $row_historybuy['price_history']);
                                 ?>
-                                    <h3><?= $row['']?></h3>
+                                    <?php for($i=0;$i<count($name_all);$i){?>
+                                        <h3>dfsdfs</h3>
+                                    <?php } ?>
                                 <?php } ?>
                             <?php } ?>
                         </div>
