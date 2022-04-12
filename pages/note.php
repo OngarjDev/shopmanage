@@ -51,40 +51,57 @@
                             </div>
                         </div>
                         <div class="card mt-2">
-                            <?php
-                            require_once('../php_action/dbconnect.php');
-                            $sql = "SELECT * FROM note WHERE id_staff = '" . $_SESSION['id_staff'] . "' AND type_note = 'logout' ORDER BY id_note DESC";
-                            if (isset($_SESSION['dataselect'])) {
-                                if ($_SESSION['dataselect'] == 'historybuy') {
-                                    $sql = "SELECT * FROM history WHERE id_staff = '" . $_SESSION['id_staff'] . "' ORDER BY id_history DESC";
-                                } else if ($_SESSION['dataselect'] == 'historyadditem') {
-                                    $sql = "SELECT * FROM note WHERE id_staff = '" . $_SESSION['id_staff'] . "' AND type_note = 'additem' ORDER BY id_note DESC";
+                            <div class="card-body">
+                                <?php
+                                require_once('../php_action/dbconnect.php');
+                                $sql = "SELECT * FROM note WHERE id_staff = '" . $_SESSION['id_staff'] . "' AND type_note = 'logout' ORDER BY id_note DESC";
+                                if (isset($_SESSION['dataselect'])) {
+                                    if ($_SESSION['dataselect'] == 'historybuy') {
+                                        $sql = "SELECT * FROM history WHERE id_staff = '" . $_SESSION['id_staff'] . "' ORDER BY id_history DESC";
+                                    } else if ($_SESSION['dataselect'] == 'historyadditem') {
+                                        $sql = "SELECT * FROM note WHERE id_staff = '" . $_SESSION['id_staff'] . "' AND type_note = 'additem' ORDER BY id_note DESC";
+                                    }
                                 }
-                            }
-                            $result = $con->query($sql);
-                            echo $_SESSION['dataselect'];
-                            ?>
-                            <?php if ($_SESSION['dataselect'] == 'historyadditem' || $_SESSION['dataselect'] == 'login-logoutstaff' || $_SESSION['dataselect'] == null) { ?>
-                                <?php //รอแยก เข้า ออก กับ เพิ่มสินค้า ?>
                                 $result = $con->query($sql);
-                                <h3>historyadditem</h3>
-                            <?php
-                            } 
-                            else if ($_SESSION['dataselect'] == 'historybuy') {
-                                $result = $con->query($sql)or die("dasdadad");
-                                while ($row_historybuy = $result->fetch_assoc()) {
-                                    echo $result->num_rows;
-
-                                    print_r($row);
-                                    echo "TEST";
-                                    $name_all = explode(',', $row_historybuy['name_history']);
-                                    $price_all = explode(',', $row_historybuy['price_history']);
                                 ?>
-                                    <?php for($i=0;$i<count($name_all);$i){?>
-                                        <h3>dfsdfs</h3>
+                                <?php if ($_SESSION['dataselect'] == 'historyadditem' || $_SESSION['dataselect'] == 'login-logoutstaff' || $_SESSION['dataselect'] == null) { ?>
+                                    <?php //รอแยก เข้า ออก กับ เพิ่มสินค้า 
+                                    ?>
+                                    $result = $con->query($sql);
+                                    <h3>historyadditem</h3>
+                                    <?php
+                                } else if ($_SESSION['dataselect'] == 'historybuy') {
+                                    $result = $con->query($sql);
+                                    while ($row_historybuy = $result->fetch_assoc()) {
+                                        $name_all = explode(',', $row_historybuy['name_item']);
+                                        $price_all = explode(',', $row_historybuy['price_item']);
+                                    ?>
+                                        <h3 class="text-center mt-2">รายการสั่งซื้อ <?= $row_historybuy['id_history'] ?></h3>
+                                        <div class="container-fuild">
+                                            <div class="row">
+                                                <div class="col-xl-6 col-lg-6 col-md-6">
+                                                    <h2>ชื่อสินค้า</h2>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-6 col-md-6">
+                                                    <h2 class="text-end">ราคาสินค้า</h2>
+                                                </div>
+                                            </div>
+
+                                            <?php for ($i = 0; $i < count($name_all); $i++) { ?>
+                                                <div class="row">
+                                                    <div class="col-xl-6 col-lg-6 col-md-6">
+                                                        <h5><?= $name_all[$i] ?></h5>
+                                                    </div>
+                                                    <div class="col-xl-6 col-lg-6 col-md-6">
+                                                        <h5 class="text-end me-5"><?= $price_all[$i] ?> บาท</h5>
+                                                    </div>
+                                                </div>
+                                            <?php } ?>
+                                            <hr>
+                                        </div>
                                     <?php } ?>
                                 <?php } ?>
-                            <?php } ?>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1"></div>
