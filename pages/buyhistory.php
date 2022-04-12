@@ -54,9 +54,9 @@
                         require('../php_action/dbconnect.php');
                         session_start();
                         if ($_SESSION['order'] == 'confirm') {
-                            $sql = "SELECT * FROM history WHERE id_staff = '$id_staff' AND image_history != '0' ORDER BY id_history DESC";
+                            $sql = "SELECT * FROM history WHERE image_history != '0' ORDER BY id_history DESC";
                         } else {
-                            $sql = "SELECT * FROM history WHERE id_staff = '$id_staff' ORDER BY id_history DESC";
+                            $sql = "SELECT * FROM history ORDER BY id_history DESC";
                         }
                         $result = $con->query($sql);
                         ?>
@@ -81,9 +81,18 @@
                                             $datetime = explode(" ", $row['datetime_history']);
                                             $time =  explode(".", $datetime[1]);
                                             ?>
+                                            <?php if ($row['id_staff'] == $id_staff) { ?>
+                                                <p class="card-text"><small class="text-muted">พนักงานที่ทำรายการ : คุณทำรายการ</small></p>
+                                            <?php } else {
+                                                $sql_staff = "SELECT lname_staff,fname_staff,number_staff FROM staff WHERE id_staff = '" . $row['id_staff'] . "'";
+                                                $result_staff = $con->query($sql_staff);
+                                                $row_staff = $result_staff->fetch_assoc();
+                                            ?>
+                                                <p class="card-text"><small class="text-muted">ชื่อพนักงาน : <?= $row_staff['fname_staff'] ?> <?= $row_staff['lname_staff'] ?> (รหัสพนักงาน : <?= $row_staff['number_staff'] ?>)</small></p>
+                                            <?php } ?>
                                             <p class="card-text"><small class="text-muted">วันที่ซื้อสินค้า : <?= $datetime[0] ?><br>เวลาที่ซื้อสินค้า : <?= $time[0] ?> (เวลา ประเทศไทย)<br>รหัสกำกับใบชำระเงิน : <?= $row['pin_history'] ?></small></p>
-                                            <?php if ($row['image_history'] == 0 && $row['transfer_history'] != 'cash') { ?>
-                                                <div class="btn-group w-100" role="group" aria-label="Basic example">
+                                            <?php if ($row['image_history'] == 0 && $row['transfer_history'] != 'cash' || $row['id_staff'] == $id_staff) { ?>
+                                                <div class="btn-group w-100" role="group">
                                                     <button type="button" onclick="window.location.href = 'pdfprint.php?noworder=<?php echo $row['id_history'] ?>&transfer=<?php echo $row['transfer_history'] ?>'" class="btn btn-primary">ตราจสอบใบเสร็จ</button>
                                                     <button type="button" onclick="ageen(this.value)" value="<?php echo $row['id_history'] ?>" class="btn btn-primary">ยืนยันการชำระเงิน</button>
                                                 </div>
@@ -95,7 +104,10 @@
                                                     <label>รับรองรับชนิดรูปภาพ 'jpeg','png' เท่านั้น</label>
                                                 </form>
                                             <?php } else { ?>
-                                                <button type="button" onclick="window.location.href = 'pdfprint.php?noworder=<?php echo $row['id_history'] ?>&transfer=<?php echo $row['transfer_history'] ?>'" class="btn btn-primary w-100">ตราจสอบใบเสร็จ</button>
+                                                <div class="btn-group w-100" role="group">
+                                                    <button type="button" onclick="window.location.href = 'pdfprint.php?noworder=<?php echo $row['id_history'] ?>&transfer=<?php echo $row['transfer_history'] ?>'" class="btn btn-primary">ตราจสอบใบเสร็จ</button>
+                                                    <a class="btn btn-primary" href="<?= $row['image_history']?>">ตรวจสอบเอกสาร</a>
+                                                </div>
                                             <?php } ?>
                                         </div>
                                     </div>

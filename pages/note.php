@@ -33,12 +33,6 @@
                                             <option value="login-logoutstaff">ข้อมูลการเข้า-ออก ของพนักงาน</option>
                                         <?php } ?>
 
-                                        <?php if ($_SESSION['dataselect'] == 'historybuy') { ?>
-                                            <option value="historybuy" selected>ดูประวัติการชำระเงินทั้งหมด</option>
-                                        <?php } else { ?>
-                                            <option value="historybuy">ดูประวัติการชำระเงินทั้งหมด</option>
-                                        <?php } ?>
-
                                         <?php if ($_SESSION['dataselect'] == 'historyadditem') { ?>
                                             <option value="historyadditem" selected>ดูประวัติการเพิ่มสินค้าทั้งหมด</option>
                                         <?php } else { ?>
@@ -54,12 +48,10 @@
                             <div class="card-body">
                                 <?php
                                 require_once('../php_action/dbconnect.php');
-                                $sql = "SELECT * FROM note WHERE id_staff = '" . $_SESSION['id_staff'] . "' AND type_note = 'logout' ORDER BY id_note DESC";
+                                $sql = "SELECT * FROM note WHERE type_note = 'logout' ORDER BY id_note DESC";
                                 if (isset($_SESSION['dataselect'])) {
-                                    if ($_SESSION['dataselect'] == 'historybuy') {
-                                        $sql = "SELECT * FROM history WHERE id_staff = '" . $_SESSION['id_staff'] . "' ORDER BY id_history DESC";
-                                    } else if ($_SESSION['dataselect'] == 'historyadditem') {
-                                        $sql = "SELECT * FROM note WHERE id_staff = '" . $_SESSION['id_staff'] . "' AND type_note = 'additem' ORDER BY id_note DESC";
+                                    if ($_SESSION['dataselect'] == 'historyadditem') {
+                                        $sql = "SELECT * FROM note WHERE type_note = 'additem' ORDER BY id_note DESC";
                                     }
                                 }
                                 $result = $con->query($sql);
@@ -70,40 +62,7 @@
                                     $result = $con->query($sql);
                                     <h3>historyadditem</h3>
                                     <?php
-                                } else if ($_SESSION['dataselect'] == 'historybuy') {
-                                    $result = $con->query($sql);
-                                    while ($row_historybuy = $result->fetch_assoc()) {
-                                        $name_all = explode(',', $row_historybuy['name_item']);
-                                        $price_all = explode(',', $row_historybuy['price_item']);
-                                    ?>
-                                        <h3 class="text-center mt-2">รายการสั่งซื้อ <?= $row_historybuy['id_history'] ?></h3>
-                                        <div class="container-fuild">
-                                            <div class="row">
-                                                <div class="col-xl-6 col-lg-6 col-md-6">
-                                                    <h2>ชื่อสินค้า</h2>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-md-6">
-                                                    <h2 class="text-end">ราคาสินค้า</h2>
-                                                </div>
-                                            </div>
-
-                                            <?php for ($i = 0; $i < count($name_all); $i++) { ?>
-                                                <div class="row">
-                                                    <div class="col-xl-6 col-lg-6 col-md-6">
-                                                        <h5 class="ms-3"><?= $name_all[$i] ?></h5>
-                                                    </div>
-                                                    <div class="col-xl-6 col-lg-6 col-md-6">
-                                                        <h5 class="text-end me-5"><?= $price_all[$i] ?> บาท</h5>
-                                                    </div>
-                                                </div>
-                                            <?php } ?>
-                                            <div class="row">
-                                                <h4 class="text-center">รายละเอียดการสั่งซื้อ</h4>
-                                            </div>
-                                            <hr>
-                                        </div>
-                                    <?php } ?>
-                                <?php } ?>
+                                }?>
                             </div>
                         </div>
                     </div>
