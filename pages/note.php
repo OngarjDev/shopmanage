@@ -90,13 +90,16 @@
                                             <?php for ($i = 0; $i < count($name_all); $i++) { ?>
                                                 <div class="row">
                                                     <div class="col-xl-6 col-lg-6 col-md-6">
-                                                        <h5><?= $name_all[$i] ?></h5>
+                                                        <h5 class="ms-3"><?= $name_all[$i] ?></h5>
                                                     </div>
                                                     <div class="col-xl-6 col-lg-6 col-md-6">
                                                         <h5 class="text-end me-5"><?= $price_all[$i] ?> บาท</h5>
                                                     </div>
                                                 </div>
                                             <?php } ?>
+                                            <div class="row">
+                                                <h4 class="text-center">รายละเอียดการสั่งซื้อ</h4>
+                                            </div>
                                             <hr>
                                         </div>
                                     <?php } ?>
