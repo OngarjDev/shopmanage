@@ -91,7 +91,7 @@
                                                 <p class="card-text"><small class="text-muted">ชื่อพนักงาน : <?= $row_staff['fname_staff'] ?> <?= $row_staff['lname_staff'] ?> (รหัสพนักงาน : <?= $row_staff['number_staff'] ?>)</small></p>
                                             <?php } ?>
                                             <p class="card-text"><small class="text-muted">วันที่ซื้อสินค้า : <?= $datetime[0] ?><br>เวลาที่ซื้อสินค้า : <?= $time[0] ?> (เวลา ประเทศไทย)<br>รหัสกำกับใบชำระเงิน : <?= $row['pin_history'] ?></small></p>
-                                            <?php if ($row['image_history'] == 0 && $row['transfer_history'] != 'cash' || $row['id_staff'] == $id_staff) { ?>
+                                            <?php if ($row['image_history'] == 0 && $row['transfer_history'] != 'cash') { ?>
                                                 <div class="btn-group w-100" role="group">
                                                     <button type="button" onclick="window.location.href = 'pdfprint.php?noworder=<?php echo $row['id_history'] ?>&transfer=<?php echo $row['transfer_history'] ?>'" class="btn btn-primary">ตราจสอบใบเสร็จ</button>
                                                     <button type="button" onclick="ageen(this.value)" value="<?php echo $row['id_history'] ?>" class="btn btn-primary">ยืนยันการชำระเงิน</button>
@@ -106,7 +106,9 @@
                                             <?php } else { ?>
                                                 <div class="btn-group w-100" role="group">
                                                     <button type="button" onclick="window.location.href = 'pdfprint.php?noworder=<?php echo $row['id_history'] ?>&transfer=<?php echo $row['transfer_history'] ?>'" class="btn btn-primary">ตราจสอบใบเสร็จ</button>
-                                                    <a class="btn btn-primary" href="<?= $row['image_history']?>">ตรวจสอบเอกสาร</a>
+                                                    <?php if($row['transfer_history'] == 'bank'){?>
+                                                        <a class="btn btn-primary" href="<?= $row['image_history']?>">ตรวจสอบเอกสาร</a>
+                                                    <?php }?>
                                                 </div>
                                             <?php } ?>
                                         </div>
