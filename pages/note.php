@@ -47,22 +47,14 @@
                         <div class="card mt-2">
                             <div class="card-body">
                                 <?php
-                                require_once('../php_action/dbconnect.php');
-                                $sql = "SELECT * FROM note WHERE type_note = 'logout' ORDER BY id_note DESC";
-                                if (isset($_SESSION['dataselect'])) {
-                                    if ($_SESSION['dataselect'] == 'historyadditem') {
-                                        $sql = "SELECT * FROM note WHERE type_note = 'additem' ORDER BY id_note DESC";
-                                    }
+                                require_once('../php_action/connect.php');
+                                if($_SESSION['dataselect'] == 'login-logoutstaff'){
+                                $sql = "SELECT * FROM note WHERE type_note = 'login-logoutstaff'";
                                 }
-                                $result = $con->query($sql);
+                                if($_SESSION['dataselect'] == 'login-logoutstaff'){
+                                    $sql = "SELECT * FROM note WHERE type_note = 'login-logoutstaff'";
+                                }
                                 ?>
-                                <?php if ($_SESSION['dataselect'] == 'historyadditem' || $_SESSION['dataselect'] == 'login-logoutstaff' || $_SESSION['dataselect'] == null) { ?>
-                                    <?php //รอแยก เข้า ออก กับ เพิ่มสินค้า 
-                                    ?>
-                                    $result = $con->query($sql);
-                                    <h3>historyadditem</h3>
-                                    <?php
-                                }?>
                             </div>
                         </div>
                     </div>
