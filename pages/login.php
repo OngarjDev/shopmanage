@@ -82,9 +82,10 @@
     $result = $con->query($sql);
     $row = $result->fetch_assoc();
 
+    $sql_deletedata = "DELETE FROM note WHERE (datetime_note)";
     date_default_timezone_set('Asia/Bangkok');
     $date_logout = $row['datetime_note'] . '//' . date("Y-m-d h:i:s");
-    $sql = "UPDATE note SET type_note = 'logout',content_note = '$date_logout' WHERE id_staff = '" . $_SESSION['id_staff'] . "'";
+    $sql = "UPDATE note SET type_note = 'logout',content_note = '$date_logout' WHERE id_note = '$row[id_note]' ";
     $result = $con->query($sql);
     session_destroy();
     ?>

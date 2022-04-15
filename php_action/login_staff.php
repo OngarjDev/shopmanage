@@ -19,7 +19,7 @@ if (isset($_POST['form']) && $_POST['form'] == 'login') {
                 $sql = "UPDATE staff SET login_staff = 1,datelogin_staff = Now() WHERE id_staff = '$data_staff[id_staff]'";
                 $result = $con->query($sql);
 
-                $sql = "INSERT INTO note(id_staff,content_note,datetime_note,type_note) VALUES('$data_staff[id_staff]',Now(),Now(),'login')";
+                $sql = "INSERT INTO note(id_staff,content_note,datetime_note,type_note,name_staff) VALUES('$data_staff[id_staff]',Now(),Now(),'login','$data_staff[fname_staff]')";
                 $result = $con->query($sql);
                 header('location: ../pages/index.php');
             } else {
@@ -38,7 +38,7 @@ if (isset($_POST['form']) && $_POST['form'] == 'login') {
                     $sql = "UPDATE note SET type_note = 'logout',content_note = '$date_logout' WHERE id_staff = '" . $_SESSION['id_staff'] . "'";
                     $result = $con->query($sql);
 
-                    $sql = "INSERT INTO note(id_staff,content_note,datetime_note,type_note) VALUES('$data_staff[id_staff]',Now(),Now(),'login')";
+                    $sql = "INSERT INTO note(id_staff,content_note,datetime_note,type_note,name_staff) VALUES('$data_staff[id_staff]',Now(),Now(),'login','$data_staff[fname_staff]')";
                     $result = $con->query($sql);
 
                     $_SESSION['id_staff'] = $data_staff['id_staff'];

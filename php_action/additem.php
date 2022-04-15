@@ -54,7 +54,7 @@ if($_POST['action'] == 'updateitems'){
 
     $data = $row['name_item'].'-'. $number_item .'-'.$row['number_item'];
 
-    $sql = "INSERT INTO note (type_note,datetime_note,id_staff,content_note) values('additem',NOW(),'".$_SESSION['id_staff']."','$data')";
+    $sql = "INSERT INTO note (type_note,datetime_note,id_staff,content_note,name_staff) values('additem',NOW(),'".$_SESSION['id_staff']."','$data','".$_SESSION['name_staff']."')";
     $result = $con->query($sql);
     header('location: ../pages/additems.php?info=เพิ่มข้อมูลเรียบร้อย');
 }

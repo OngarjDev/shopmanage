@@ -9,7 +9,7 @@ $name_staff = $_SESSION['name_staff'];
 ?>
 <script>
     function checktime() {
-        window.location.href = '../pages/login.php?info=ระบบไม่พบการเคลื่อนไหวของคุณ จึงตัดการเชื่อมต่อจากระบบ';
+        window.location.href = '../pages/login.php?info=ระบบไม่พบการเคลื่อนไหวของคุณ ถูกตัดการเชื่อมต่อโดยระบบ';
     }
 
     function updatetime() {
