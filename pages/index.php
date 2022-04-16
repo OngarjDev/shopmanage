@@ -62,7 +62,7 @@
                             <div class="row mb-3">
                                 <div class="col-xl-7 col-lg-7 col-md-7">
                                     <div class="card">
-                                        <canvas id="sumtoday" style="position: relative; height:82vh;"></canvas>
+                                        <canvas id="sumtoday" style="position: relative; height:75vh;"></canvas>
                                     </div>
                                 </div>
                                 <div class="col-xl-5 col-lg-5 col-md-5">
@@ -111,79 +111,51 @@
                     <div class="col-xl-1 col-lg-1 col-md-1"></div>
                 </div>
             </div>
-            <?php
-            date_default_timezone_set('Asia/Bangkok');
-            $year = date('Y');
-            require_once('../php_action/dbconnect.php');
-
-            $sql = "SELECT * FROM history WHERE (datetime_history BETWEEN '$year-$month-01' AND '$year-$month-31') AND id_staff = '$id_staff'";
-            $result = $con->query($sql);
-            
-            $number_date = [];
-            $date = [];
-            while ($row = $result->fetch_assoc()) {
-                array_push($number_date, $result->num_rows);
-                array_push($date, $row['datetime_history']);
-            }
-            ?>
         </main>
     </div>
     </div>
     <script src="../node_modules/chart.js/dist/chart.js"></script>
     <script>
-        const ctxprofit = document.getElementById('sumtoday');
-        const charprofit = new Chart(ctxprofit, {
+        const ctxtransfer = document.getElementById('sumtoday');
+        const Charttransfer = new Chart(ctxtransfer, {
+            type: 'bar',
             data: {
                 datasets: [{
-                    type: 'bar',
-                    label: 'ประวัติการเข้า-ออกระบบของคุณ',
+                    label: 'ช่องทางชำระเงิน',
                     <?php
-                    // $year = date('Y');
-                    // $month = date('m');
-                    // require_once('../php_action/dbconnect.php');
-                    // for ($i = 1; $i <= 31; $i++) {
-                    //     $sql = "SELECT * FROM history WHERE datetime_history BETWEEN '$year-$month-$i' AND '$year-$month-$i+1'";
-                    //     $result = $con->query($sql);
-                    //     echo $result->num_rows;
-                    //     $number_date = [];
-                    //     $date = [];
-                    //     while ($row = $result->fetch_assoc()) {
-                    //         array_push($number_date, $result->num_rows);
-                    //         array_push($date, $row['datetime_history']);
-                    //     }
-                    // }
+                    require_once('../php_action/dbconnect.php');
+                    date_default_timezone_set("Asia/Bangkok");
+                    $month = date('m');
+                    $year = date('Y');
+                    $number_date = [];
+                    $data = [];
+                    for ($i = 0; $i < 31; $i++) {
+                        $sql = "SELECT * FROM note WHERE (YEAR(datetime_note) = '$year') AND (MONTH(datetime_note) = '$month') AND (DAY(datetime_note) = '$i') AND id_staff = '$id_staff' AND type_note = 'logout'";
+                        $result = $con->query($sql);
+                        $row = $result->fetch_assoc();
+                        array_push($number_date, $result->num_rows);
+                        array_push($data, 'วันที่ ' . $i + 1);
+                    }
                     ?>
-                    data: [<?php //for ($i = 0; $i <= 31; $i++) {echo $number_date[$i] . ',';}
-                            ?>],
+                    data: [<?php for($i=0;$i < 31;$i++){if($i == 30){echo "'".$number_date[$i]."'" ;}else{echo "'".$number_date[$i]."'" . ',';}}?>],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(54, 162, 235, 0.2)'
                     ],
                     borderColor: [
                         'rgba(255, 99, 132, 1)',
                         'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(153, 102, 255, 1)'
                     ],
                     borderWidth: 1
                 }],
-                labels: [<?php //foreach ($date as $value) {echo $date . ',';}
-                            ?>],
+                labels: [<?php for($i=0;$i < 31;$i++){if($i == 30){echo "'".$data[$i]."'" ;}else{echo "'".$data[$i]."'" . ',';}}?>],
             },
             options: {
                 scales: {
                     y: {
                         beginAtZero: true
                     }
-                }
+                },
             }
         });
     </script>

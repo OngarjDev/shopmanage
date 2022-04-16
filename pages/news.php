@@ -36,35 +36,33 @@
                         </form>
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6">
-                        <div class="border border-info rounded">
-                            <h3 class="text-center mt-2">ข่าวสารทั้งหมด</h3>
-                            <?php
-                            require_once('../php_action/dbconnect.php');
-                            $sql = "SELECT * FROM news ORDER BY id_news DESC";
-                            $result = $con->query($sql);
-                            while ($row = $result->fetch_assoc()) {
-                            ?>
-                                <div class="card mt-2 bg-light">
-                                    <div class="card-header">
-                                        <h5 class="card-title">
-                                            หัวข้อ : 
-                                            <?php echo $row['title_News'];?>
-                                        </h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text">รายละเอียด : <?php echo $row['content_News']; ?></p>
-                                        <?php
-                                        if ($row['major_News'] == '1') {
-                                            echo "<div class='text-success'>(สำคัญ)</div>";
-                                        } else {
-                                            echo "<div class='text-danger'>(ทั่วไป)</div>";
-                                        }
-                                        ?>
-                                        <p class="mt-2 mb-0">ลงวันที่-เวลา : <?php echo $row['datetime_News']; ?></p>
-                                    </div>
-                                <?php } ?>
+                        <h3 class="text-center mt-2">ข่าวสารทั้งหมด</h3>
+                        <?php
+                        require_once('../php_action/dbconnect.php');
+                        $sql = "SELECT * FROM news ORDER BY id_news DESC LIMIT 4";
+                        $result = $con->query($sql);
+                        while ($row = $result->fetch_assoc()) {
+                        ?>
+                            <div class="card mt-2 bg-light">
+                                <div class="card-header">
+                                    <h5 class="card-title">
+                                        หัวข้อ :
+                                        <?php echo $row['title_News']; ?>
+                                    </h5>
                                 </div>
-                        </div>
+                                <div class="card-body">
+                                    <p class="card-text">รายละเอียด : <?php echo $row['content_News']; ?></p>
+                                    <?php
+                                    if ($row['major_News'] == '1') {
+                                        echo "<div class='text-success'>(สำคัญ)</div>";
+                                    } else {
+                                        echo "<div class='text-danger'>(ทั่วไป)</div>";
+                                    }
+                                    ?>
+                                    <p class="mt-2 mb-0">ลงวันที่-เวลา : <?php echo $row['datetime_News']; ?></p>
+                                </div>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
         </main>

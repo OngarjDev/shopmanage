@@ -1,5 +1,4 @@
 <?php
-///หน้านี้สำรองไว้ สำหรับการค้นหาในอนาคต
 if(isset($_GET['search'])){
     $keyword = $_GET['search'];
     require('dbconnect.php');
