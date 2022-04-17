@@ -31,7 +31,7 @@
                                             require_once('../php_action/dbconnect.php');
                                             $year = date('Y');
                                             $month = date('m');
-                                            $sql = "SELECT * FROM history WHERE id_staff = '$id_staff' AND (datetime_history BETWEEN '$year-$month-01' AND '$year-$month-31')";
+                                            $sql = "SELECT datetime_history FROM history WHERE id_staff = '$id_staff' AND (datetime_history BETWEEN '$year-$month-01' AND '$year-$month-31')";
                                             $result = $con->query($sql);
                                             $count = $result->num_rows;
                                             ?>
@@ -48,7 +48,7 @@
                                             require_once('../php_action/dbconnect.php');
                                             $year = date('Y');
                                             $month = date('m');
-                                            $sql = "SELECT * FROM note WHERE id_staff = '$id_staff'AND type_note = 'logout' AND (datetime_note BETWEEN '$year-$month-01' AND '$year-$month-31')";
+                                            $sql = "SELECT datetime_note FROM note WHERE id_staff = '$id_staff'AND type_note = 'logout' AND (datetime_note BETWEEN '$year-$month-01' AND '$year-$month-31')";
                                             $result = $con->query($sql);
                                             $count = $result->num_rows;
                                             ?>
@@ -62,24 +62,28 @@
                             <div class="row mb-3">
                                 <div class="col-xl-7 col-lg-7 col-md-7">
                                     <div class="card">
-                                        <canvas id="sumtoday" style="position: relative; height:75vh;"></canvas>
+                                        <div class="card-header bg-success text-white">
+                                            <h3 class="card-title text-center mt-2">จำนวนสินค้าที่มีอยู่ในระบบ</h3>
+                                        </div>
+                                        <canvas id="sumtoday" style="position: relative; height:70vh;"></canvas>
                                     </div>
                                 </div>
                                 <div class="col-xl-5 col-lg-5 col-md-5">
-                                    <div class="card">
-                                        <div class="card-body">
+                                    <div class="card mt-2">
+                                        <div class="card-header bg-success text-white">
                                             <h3 class="text-center mt-3">ประวัติการทำรายการล่าสุดของคุณ</h3>
-                                            <hr>
+                                        </div>
+                                        <div class="card-body">
                                             <?php
                                             require_once('../php_action/dbconnect.php');
-                                            $sql = "SELECT * FROM history WHERE id_staff = '$id_staff' ORDER BY datetime_history DESC LIMIT 3";
+                                            $sql = "SELECT name_item,values_item,id_history FROM history WHERE id_staff = '$id_staff' ORDER BY datetime_history DESC LIMIT 3";
                                             $result = $con->query($sql);
                                             while ($row = $result->fetch_assoc()) {
                                                 $name_item = explode(',', $row['name_item']);
                                                 $number_item = explode(',', $row['values_item']);
                                                 $count = count($name_item);
                                             ?>
-                                                <h3 class="text-center">หมายเลขคำสั่งซื้อ <?= $row['id_history'] ?></h3>
+                                                <h3 class="text-center mt-2">หมายเลขคำสั่งซื้อ <?= $row['id_history'] ?></h3>
                                                 <div class="container-fluid">
                                                     <div class="row">
                                                         <div class="col-xl-6 col-lg-6 col-md-6">
@@ -116,47 +120,34 @@
     </div>
     <script src="../node_modules/chart.js/dist/chart.js"></script>
     <script>
-        const ctxtransfer = document.getElementById('sumtoday');
-        const Charttransfer = new Chart(ctxtransfer, {
-            type: 'bar',
+        const ctxstaff = document.getElementById('sumtoday');
+        const Chartstaff = new Chart(ctxstaff, {
+            type: 'doughnut',
             data: {
+                label:'จำนวนสินค้าที่มีอยู่',
+                <?php
+                require_once('../php_action/dbconnect.php');
+                $sql = "SELECT name_item,number_item FROM item";
+                $result = $con->query($sql);
+                $name_item = array();
+                $number_item = array();
+                while($row = $result->fetch_assoc()){
+                    array_push($name_item,$row['name_item']);
+                    array_push($number_item,$row['number_item']);
+                }
+                ?>
                 datasets: [{
-                    label: 'ช่องทางชำระเงิน',
-                    <?php
-                    require_once('../php_action/dbconnect.php');
-                    date_default_timezone_set("Asia/Bangkok");
-                    $month = date('m');
-                    $year = date('Y');
-                    $number_date = [];
-                    $data = [];
-                    for ($i = 0; $i < 31; $i++) {
-                        $sql = "SELECT * FROM note WHERE (YEAR(datetime_note) = '$year') AND (MONTH(datetime_note) = '$month') AND (DAY(datetime_note) = '$i') AND id_staff = '$id_staff' AND type_note = 'logout'";
-                        $result = $con->query($sql);
-                        $row = $result->fetch_assoc();
-                        array_push($number_date, $result->num_rows);
-                        array_push($data, 'วันที่ ' . $i + 1);
-                    }
-                    ?>
-                    data: [<?php for($i=0;$i < 31;$i++){if($i == 30){echo "'".$number_date[$i]."'" ;}else{echo "'".$number_date[$i]."'" . ',';}}?>],
+                    data: [<?php foreach($number_item as $values){ echo $values.',';}?>],
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
                     ],
                     borderWidth: 1
                 }],
-                labels: [<?php for($i=0;$i < 31;$i++){if($i == 30){echo "'".$data[$i]."'" ;}else{echo "'".$data[$i]."'" . ',';}}?>],
+                labels: [<?php foreach($name_item as $name){ echo "'".$name."'".',';}?>],
             },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
-            }
+            hoverOffset: 4
         });
     </script>
     <?php include('../php_action/scripts.php') ?>

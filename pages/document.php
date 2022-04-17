@@ -23,11 +23,11 @@
                         <div class="row text-center">
                             <div class="col-xl-6 col-lg-6 col-md-6">
                                 <h6>แบบออนไลน์(ใหม่ล่าสุดและทันสมัย)</h6>
-                                <a href="" class="text-decoration-none">สำหรับ การใช้งานระบบ</a>
+                                <a href="https://docs.google.com/document/d/17o-yVkox0AemxmC88T2iD9OT7LMZVVCioML5izN8cLY/edit?usp=sharing" class="text-decoration-none">สำหรับ การใช้งานระบบ</a>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6">
                                 <h6>แบบออฟไลน์(ไม่แนะนำ)</h6>
-                                <a href="" class="text-decoration-none">สำหรับ การใช้งานระบบ</a>
+                                <a href="../document/1.0.html" class="text-decoration-none">สำหรับ การใช้งานระบบ</a>
                             </div>
                             <p class="mt-5 text-secondary">สำหรับคู่มือการติดตั้งระบบ สามารถดูได้ที่โฟล์เดอร์ Documentที่ติดมา กับระบบ</p>
                         </div>
