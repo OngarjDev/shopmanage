@@ -61,11 +61,11 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-xl-7 col-lg-7 col-md-7">
-                                    <div class="card">
+                                    <div class="card mb-3">
                                         <div class="card-header bg-success text-white">
                                             <h3 class="card-title text-center mt-2">จำนวนสินค้าที่มีอยู่ในระบบ</h3>
                                         </div>
-                                        <canvas id="sumtoday" style="position: relative; height:70vh;"></canvas>
+                                        <canvas id="sumtoday" style="position: relative; height:70vh;" class="mb-3 mt-3"></canvas>
                                     </div>
                                 </div>
                                 <div class="col-xl-5 col-lg-5 col-md-5">
@@ -120,35 +120,7 @@
     </div>
     <script src="../node_modules/chart.js/dist/chart.js"></script>
     <script>
-        const ctxstaff = document.getElementById('sumtoday');
-        const Chartstaff = new Chart(ctxstaff, {
-            type: 'doughnut',
-            data: {
-                label:'จำนวนสินค้าที่มีอยู่',
-                <?php
-                require_once('../php_action/dbconnect.php');
-                $sql = "SELECT name_item,number_item FROM item";
-                $result = $con->query($sql);
-                $name_item = array();
-                $number_item = array();
-                while($row = $result->fetch_assoc()){
-                    array_push($name_item,$row['name_item']);
-                    array_push($number_item,$row['number_item']);
-                }
-                ?>
-                datasets: [{
-                    data: [<?php foreach($number_item as $values){ echo $values.',';}?>],
-                    backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                    ],
-                    borderWidth: 1
-                }],
-                labels: [<?php foreach($name_item as $name){ echo "'".$name."'".',';}?>],
-            },
-            hoverOffset: 4
-        });
+        <?php require_once('../js/chart/index.php')?>
     </script>
     <?php include('../php_action/scripts.php') ?>
 </body>
