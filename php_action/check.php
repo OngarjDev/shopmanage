@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if (!isset($_SESSION['id_staff']) || !isset($_SESSION['name_staff'])) {
     header('location: login.php');
 }
@@ -21,3 +22,4 @@ $name_staff = $_SESSION['name_staff'];
     window.onload = updatetime();
     setInterval(checktime,3000000);
 </script>
+?>

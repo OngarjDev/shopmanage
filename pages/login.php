@@ -23,10 +23,10 @@
                         $result = $con->query($sql);
                         while ($row = $result->fetch_assoc()) {
                         ?>
-                        <h5 class="card-title">
-                            หัวข้อ :
-                            <?php echo $row['title_News']; ?>
-                        </h5>
+                    <h5 class="card-title">
+                        หัวข้อ :
+                        <?php echo $row['title_News']; ?>
+                    </h5>
                     <div class="card-body">
                         <p class="card-text">รายละเอียด : <?php echo $row['content_News']; ?></p>
                         <p class="mt-2 mb-0">ลงวันที่-เวลา : <?php echo $row['datetime_News']; ?></p>
@@ -60,6 +60,17 @@
             </div>
         </div>
     </div>
+    <?php
+    session_start();
+
+    require_once('../php_action/classcheck.php');
+    $Limit = new check();
+    $Limit->LimitData(); /// กำหนดระยะเวลาของข้อมูลจำกัดขนาดข้อมูล
+    $Limit->UpdateStatus($_SESSION['id_staff']); /// กำหนดสถานะออนไลน์กับ ออฟไลน์ของพนักงาน
+    $Limit->lognote($_SESSION['id_staff']); /// บันทึกเวลาออกพนักงาน
+
+    session_destroy();
+    ?>
     <script>
         function datetime() {
             let datetime = new Date();
@@ -72,23 +83,6 @@
             document.getElementById('alert').setAttribute('hidden', 'true');
         }
     </script>
-    <?php
-    session_start();
-    require_once('../php_action/dbconnect.php');
-    $sql = "UPDATE staff SET login_staff = '0' WHERE id_staff = '" . $_SESSION['id_staff'] . "'";
-    $result = $con->query($sql);
-
-    $sql = "SELECT * FROM note WHERE id_staff = '" . $_SESSION['id_staff'] . "' AND type_note = 'login'";
-    $result = $con->query($sql);
-    $row = $result->fetch_assoc();
-
-    $sql_deletedata = "DELETE FROM note WHERE (datetime_note)";
-    date_default_timezone_set('Asia/Bangkok');
-    $date_logout = $row['datetime_note'] . '//' . date("Y-m-d h:i:s");
-    $sql = "UPDATE note SET type_note = 'logout',content_note = '$date_logout' WHERE id_note = '$row[id_note]' ";
-    $result = $con->query($sql);
-    session_destroy();
-    ?>
 </body>
 
 </html>

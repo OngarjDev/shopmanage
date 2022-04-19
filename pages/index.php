@@ -61,11 +61,27 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-xl-7 col-lg-7 col-md-7">
-                                    <div class="card">
+                                    <div class="card mb-3">
                                         <div class="card-header bg-success text-white">
-                                            <h3 class="card-title text-center mt-2">จำนวนสินค้าที่มีอยู่ในระบบ</h3>
+                                            <h3 class="card-title text-center mt-2">สินค้าที่ต้องตรวจสอบ</h3>
                                         </div>
-                                        <canvas id="sumtoday" style="position: relative; height:70vh;"></canvas>
+                                        <div class="card-body">
+                                            <?php
+                                            $sql = "SELECT name_item,number_item,barcode FROM item WHERE number_item <= 5 Limit 20";
+                                            $result = $con->query($sql);
+                                            while ($row = $result->fetch_assoc()) :
+                                            ?>
+                                                <h5 class="card-title">ชื่อสินค้า <?= $row['name_item'] ?></h5>
+                                                <?php if($row['number_item'] > 0){?>
+                                                    <h5 class="card-title text-warning">จำนวนสินค้าที่กำลังจะหมด คงเหลือ<?= $row['number_item'] ?> ชิ้น</h5>
+                                                    <p>รหัสบาร์โค้ด : <?= $row['barcode']?></p>
+                                                <?php } else{?>
+                                                    <h5 class="card-title text-danger">สินค้าหมด</h5>
+                                                    <p>รหัสบาร์โค้ด : <?= $row['barcode']?></p>
+                                                <?php } ?>
+                                                <hr>
+                                            <?php endwhile ?>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-xl-5 col-lg-5 col-md-5">
@@ -119,37 +135,6 @@
     </div>
     </div>
     <script src="../node_modules/chart.js/dist/chart.js"></script>
-    <script>
-        const ctxstaff = document.getElementById('sumtoday');
-        const Chartstaff = new Chart(ctxstaff, {
-            type: 'doughnut',
-            data: {
-                label:'จำนวนสินค้าที่มีอยู่',
-                <?php
-                require_once('../php_action/dbconnect.php');
-                $sql = "SELECT name_item,number_item FROM item";
-                $result = $con->query($sql);
-                $name_item = array();
-                $number_item = array();
-                while($row = $result->fetch_assoc()){
-                    array_push($name_item,$row['name_item']);
-                    array_push($number_item,$row['number_item']);
-                }
-                ?>
-                datasets: [{
-                    data: [<?php foreach($number_item as $values){ echo $values.',';}?>],
-                    backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                    ],
-                    borderWidth: 1
-                }],
-                labels: [<?php foreach($name_item as $name){ echo "'".$name."'".',';}?>],
-            },
-            hoverOffset: 4
-        });
-    </script>
     <?php include('../php_action/scripts.php') ?>
 </body>
 
