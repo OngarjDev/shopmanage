@@ -82,6 +82,10 @@
                                                 <hr>
                                             <?php endwhile ?>
                                         </div>
+<<<<<<< HEAD
+=======
+                                        <canvas id="sumtoday" style="position: relative; height:70vh;" class="mb-3 mt-3"></canvas>
+>>>>>>> 4cac285b58a55efaf9294ef5f0b801988b70efe1
                                     </div>
                                 </div>
                                 <div class="col-xl-5 col-lg-5 col-md-5">
