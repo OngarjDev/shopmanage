@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>ชำระเงิน</title>
+    <?php
+    require('../php_action/check.php');
+    include('../php_action/bootstrap.php');
+    ?>
+</head>
+
+<body class="sb-nav-fixed" onload="loadtable()">
+    <?php
+    include('../layout/nav.html');
+    include('../layout/menu.html');
+    ?>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container">
+                <div class="row mt-4">
+                    <div class="col-xl-5 col-lg-6 col-md-7">
+                        <?php
+                        session_start();
+                        if (isset($_SESSION['info'])) {
+                        ?>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>แจ้งเตือนจากระบบ</strong> <?php echo $_SESSION['info'] ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php }
+                        unset($_SESSION['info']);
+                        ?>
+                        <div id="data">
+
+                        </div>
+                    </div>
+                    <div class="col-xl-7 col-lg-6 col-md-5">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="text-center mt-2">รายการสินค้า</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="container-xxl">
+                                    <div class="row">
+                                        <?php
+                                        require_once('../php_action/dbconnect.php');
+                                        $sql = "SELECT * FROM item";
+                                        $result = $con->query($sql);
+                                        while ($row = $result->fetch_assoc()) {
+                                        ?>
+                                            <div class="col-xl-3 col-lg-4 col-md-6 mb-3">
+                                                <div class="card h-100">
+                                                    <img src="<?= $row['image_item'] ?>" width="auto" class="bg-light">
+                                                    <div class="card-text">
+
+                                                        <h5 class="text-center mt-2"><?= $row['name_item'] ?></h5>
+                                                        <div class="text-muted text-center">
+                                                            <small>ราคา <?= $row['price_item'] ?> </small><small>จำนวน <?= $row['number_item'] ?></small>
+                                                        </div>
+                                                        <?php
+                                                        if ($row['number_item'] != 0) {
+                                                            require_once('../php_action/dbconnect.php');
+                                                            $product = $row['id_item'];
+                                                            session_start();
+                                                            $id_staff = $_SESSION['id_staff'];
+                                                            $sql_check = "SELECT * FROM cart WHERE id_item = '$product' AND id_staff = '$id_staff'";
+                                                            $result_check = $con->query($sql_check);
+                                                            if ($result_check->num_rows > 0) {
+                                                        ?>
+                                                            <button class="btn btn-danger w-100 rounded-0" disabled>สินค้าอยู่ในรายการ</button>
+                                                            <?php } else { ?>
+                                                                <button class="btn btn-success w-100 rounded-0" onclick="additemintable(this.value)" value="<?= $row['barcode'] ?>">เพิ่มลงในรายการ</button>
+                                                            <?php } ?>
+                                                        <?php } else { ?>
+                                                            <button class="btn btn-danger w-100 rounded-0" disabled>สินค้าหมด</button>
+                                                        <?php } ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    </div>
+    <script src="../js/ajax/buyitem.js"></script>
+    <?php include('../php_action/scripts.php') ?>
+</body>
+
+</html>

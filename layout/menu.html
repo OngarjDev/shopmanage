@@ -1,0 +1,82 @@
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">ส่วนชำระเงิน</div>
+                    <a class="nav-link" href="buyitem.php">
+                        <img src="../image/system/icons8-cart-64.png" class="me-2" width="25">
+                        ชำระสินค้า
+                    </a>
+                    <a class="nav-link" href="buyhistory.php">
+                        <img src="../image/system/icons8-history-64.png" class="me-2" width="25">
+                        ประวัติการซื้อสินค้า
+                    </a>
+                    <div class="sb-sidenav-menu-heading">ส่วนเกี่ยวกับสินค้า</div>
+                    <a class="nav-link" href="additems.php">
+                        <img src="../image/system/icons8-add-parcel-item-from-logistic-website-portal-24.png"
+                            class="me-2" width="25">
+                        เพิ่มสินค้า
+                    </a>
+                    <a class="nav-link" href="aboutitem.php">
+                        <img src="../image/system/icons8-searching-for-an-item-delivery-shipment-address-24.png"
+                            class="me-2" width="25">
+                        รายละเอียดตัวสินค้า
+                    </a>
+                    <?php if($_SESSION['admin'] == '1'){?>
+                    <div class="sb-sidenav-menu-heading">ส่วนผู้จัดการร้านค้า</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#staff"
+                        aria-expanded="false" aria-controls="staff">
+                        <img src="../image/system/icons8-staff-48.png" class="me-2" width="25">
+                        พนักงาน
+                        <div class="sb-sidenav-collapse-arrow"></div>
+                    </a>
+                    <div class="collapse" id="staff" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link collapsed" href="staff.php">
+                                พนักงานทั้งหมด
+                            </a>
+                            <a class="nav-link collapsed" href="addstaff.php">
+                                เพิ่มพนักงาน
+                            </a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="product.php">
+                        <img src="../image/system/icons8-product-64.png" class="me-2" width="25">
+                        สินค้า
+                        <div class="sb-sidenav-collapse-arrow"></div>
+                    </a>
+
+                    <a class="nav-link collapsed" href="marketing.php">
+                        <img src="../image/system/icons8-marketing-48.png" class="me-2" width="25">
+                        การตลาด
+                        <div class="sb-sidenav-collapse-arrow"></div>
+                    </a>
+
+                    <a class="nav-link collapsed" href="news.php">
+                        <img src="../image/system/icons8-news-64.png" class="me-2" width="25">
+                        ข่าวสาร
+                        <div class="sb-sidenav-collapse-arrow"></div>
+                    </a>
+
+                    <a class="nav-link collapsed" href="note.php">
+                        <img src="../image/system/icons8-note-48.png" class="me-2" width="25">
+                        บันทึก
+                        <div class="sb-sidenav-collapse-arrow"></div>
+                    </a>
+                    <?php }?>
+                    <div class="sb-sidenav-menu-heading">ช่วยเหลือ</div>
+                    <a class="nav-link" href="document.php">
+                        <img src="../image/system/icons8-document-50.png" class="me-2" width="25">
+                        คู่มือการใช้งาน
+                    </a>
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">ชื่อพนักงาน :
+                    <?= $name_staff ?>
+                </div>
+
+            </div>
+        </nav>
+    </div>
