@@ -55,8 +55,8 @@
                     </div>
                     <div class="col-xl-8 col-lg-8 col-md-8 bg-body">
                         <div class="btn-group w-100" role="group">
-                            <a class="btn btn-primary mt-3" href="productpdf.php?action=allproduct">พิมพ์สินค้าทั้งหมด</a>
-                            <a class="btn btn-primary mt-3" href="productpdf.php?action=allnumber">พิมพ์สินค้าที่หมด</a>
+                            <a class="btn btn-primary mt-3" href="productpdf.php?action=allproduct">พิมพ์รายการสินค้าทั้งหมด</a>
+                            <a class="btn btn-primary mt-3" href="productpdf.php?action=allnumber">พิมพ์รายการสินค้าที่หมด</a>
                         </div>
                         <div class="table-responsive">
                             <table class="table">

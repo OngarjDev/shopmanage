@@ -73,72 +73,68 @@
 
 
                             <?php } else { ?>
-                                <div class="text-center">
-                                    <div class="card mt-5 mb-3">
-                                        <div class="card-header">
-                                            สินค้านี้ยังไม่ได้ลงทะเบียน โปรดลงทะเบียนก่อนเพิ่มสินค้า (<?php echo $barcode ?>)
-                                        </div>
-                                        <div class="card-body">
-                                            <form action="../php_action/additem.php" method="POST" name="additems" enctype="multipart/form-data">
-                                                <label for="" class="form-label">ชื่อสินค้า</label>
-                                                <input type="text" name="name" id="" class="form-control" required>
+                                <div class="card mt-5 mb-3">
+                                    <div class="card-header text-center">
+                                        สินค้านี้ยังไม่ได้ลงทะเบียน โปรดลงทะเบียนก่อนเพิ่มสินค้า (<?php echo $barcode ?>)
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="../php_action/additem.php" method="POST" name="additems" enctype="multipart/form-data">
+                                            <label for="" class="form-label">ชื่อสินค้า</label>
+                                            <input type="text" name="name" id="" class="form-control" required>
 
-                                                <label for="" class="form-label mt-3">ราคาสินค้า</label>
-                                                <input type="number" name="price" id="" class="form-control" required>
+                                            <label for="" class="form-label mt-3">ราคาสินค้า</label>
+                                            <input type="number" name="price" id="" class="form-control" required>
 
-                                                <label for="" class="form-label mt-3">จำนวนสินค้า</label>
-                                                <input type="number" name="number" id="" class="form-control" required>
+                                            <label for="" class="form-label mt-3">จำนวนสินค้า</label>
+                                            <input type="number" name="number" id="" class="form-control" required>
 
-                                                <label for="" class="form-label mt-3">รายละเอียดสินค้า</label>
-                                                <textarea class="form-control" name="content" aria-label="With textarea"></textarea>
+                                            <label for="" class="form-label mt-3">รายละเอียดสินค้า</label>
+                                            <textarea class="form-control" name="content" aria-label="With textarea"></textarea>
 
-                                                <label class="form-label mt-3">ประเภทสินค้า</label>
-                                                <select class="form-select" name="group">
-                                                    <option selected value="-">ไม่ต้องการเลือก</option>
-                                                    <?php
-                                                    require_once('../php_action/dbconnect.php');
-                                                    $sql_category = "SELECT * FROM category WHERE type_category = 'group'";
-                                                    $result_category = $con->query($sql_category);
-                                                    while ($row_category = $result_category->fetch_assoc()) :
-                                                    ?>
-                                                        <?php if ($row_category['name_category'] == $row['brand_item']) { ?>
-                                                            <option value="<?= $row_category['name_category'] ?>" selected><?= $row_category['name_category'] ?></option>
-                                                        <?php } else { ?>
-                                                            <option value="<?= $row_category['name_category'] ?>"><?= $row_category['name_category'] ?></option>
-                                                        <?php } ?>
-                                                    <?php endwhile ?>
-                                                </select>
+                                            <label class="form-label mt-3">ประเภทสินค้า</label>
+                                            <select class="form-select" name="group">
+                                                <option selected value="-">ไม่ต้องการเลือก</option>
+                                                <?php
+                                                require_once('../php_action/dbconnect.php');
+                                                $sql_category = "SELECT * FROM category WHERE type_category = 'group'";
+                                                $result_category = $con->query($sql_category);
+                                                while ($row_category = $result_category->fetch_assoc()) :
+                                                ?>
+                                                    <?php if ($row_category['name_category'] == $row['brand_item']) { ?>
+                                                        <option value="<?= $row_category['name_category'] ?>" selected><?= $row_category['name_category'] ?></option>
+                                                    <?php } else { ?>
+                                                        <option value="<?= $row_category['name_category'] ?>"><?= $row_category['name_category'] ?></option>
+                                                    <?php } ?>
+                                                <?php endwhile ?>
+                                            </select>
 
-                                                <label class="form-label mt-3">ผู้ผลิตสินค้า</label>
-                                                <select class="form-select" name="brand">
-                                                    <option selected value="-">ไม่ต้องการเลือก</option>
-                                                    <?php
-                                                    require_once('../php_action/dbconnect.php');
-                                                    $sql_category = "SELECT * FROM category WHERE type_category = 'brand'";
-                                                    $result_category = $con->query($sql_category);
-                                                    while ($row_category = $result_category->fetch_assoc()) :
-                                                    ?>
-                                                        <?php if ($row_category['name_category'] == $row['brand_item']) { ?>
-                                                            <option value="<?= $row_category['name_category'] ?>" selected><?= $row_category['name_category'] ?></option>
-                                                        <?php } else { ?>
-                                                            <option value="<?= $row_category['name_category'] ?>"><?= $row_category['name_category'] ?></option>
-                                                        <?php } ?>
-                                                    <?php endwhile ?>
-                                                </select>
+                                            <label class="form-label mt-3">ผู้ผลิตสินค้า</label>
+                                            <select class="form-select" name="brand">
+                                                <option selected value="-">ไม่ต้องการเลือก</option>
+                                                <?php
+                                                require_once('../php_action/dbconnect.php');
+                                                $sql_category = "SELECT * FROM category WHERE type_category = 'brand'";
+                                                $result_category = $con->query($sql_category);
+                                                while ($row_category = $result_category->fetch_assoc()) :
+                                                ?>
+                                                    <?php if ($row_category['name_category'] == $row['brand_item']) { ?>
+                                                        <option value="<?= $row_category['name_category'] ?>" selected><?= $row_category['name_category'] ?></option>
+                                                    <?php } else { ?>
+                                                        <option value="<?= $row_category['name_category'] ?>"><?= $row_category['name_category'] ?></option>
+                                                    <?php } ?>
+                                                <?php endwhile ?>
+                                            </select>
 
-                                                <label for="" class="form-label mt-3">รูปภาพประกอบ</label>
-                                                <input type="file" name="image" id="" class="form-control">
+                                            <label for="" class="form-label mt-3">รูปภาพประกอบ</label>
+                                            <input type="file" name="image" id="" class="form-control">
 
-                                                <input type="hidden" name="barcode" value="<?php echo $barcode ?>">
-                                                <input type="hidden" name="action" value="additems">
+                                            <input type="hidden" name="barcode" value="<?php echo $barcode ?>">
+                                            <input type="hidden" name="action" value="additems">
 
-                                                <input type="submit" value="เพิ่มสินค้า" class="mt-3 btn btn-info w-100">
-                                            </form>
-                                        </div>
+                                            <input type="submit" value="เพิ่มสินค้า" class="mt-3 btn btn-info w-100">
+                                        </form>
                                     </div>
                                 </div>
-
-
                             <?php } ?>
                         <?php endif ?>
                     </div>

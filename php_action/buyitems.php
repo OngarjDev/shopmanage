@@ -101,11 +101,9 @@ if ($_GET['action'] == 'finish') {
     $name = implode(",", $name_item);
     $price = implode(",", $price_item);
 
-    date_default_timezone_set('asia/bangkok');
-    $date_log = date('d-m-Y h:i:s');
     $pin = rand();
     if ($_GET['bank'] == 'bank') {
-        $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,money_history,pin_history,name_item,price_item) values('$id_staff','$item','$values','$date_log','bank',$money,$pin,'$name','$price')";
+        $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,money_history,pin_history,name_item,price_item) values('$id_staff','$item','$values',NOW(),'bank',$money,$pin,'$name','$price')";
         $result = $con->query($sql);
 
         $sql_cart = "SELECT * FROM cart INNER JOIN item ON cart.id_item = item.id_item WHERE cart.id_staff = '$id_staff'";
@@ -131,7 +129,7 @@ if ($_GET['action'] == 'finish') {
     if ($_GET['bank'] == 'cash') {
         $moneyincome = $_GET['money'];
         if ($moneyincome >= $money) {
-            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,money_history,pin_history,name_item,price_item,income_history) values('$id_staff','$item','$values','$date_log','cash',$money,$pin,'$name','$price',$moneyincome)";
+            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,money_history,pin_history,name_item,price_item,income_history) values('$id_staff','$item','$values',NOW(),'cash',$money,$pin,'$name','$price',$moneyincome)";
             $result = $con->query($sql);
 
             $sql_cart = "SELECT * FROM cart INNER JOIN item ON cart.id_item = item.id_item WHERE cart.id_staff = '$id_staff'";

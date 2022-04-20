@@ -39,7 +39,7 @@ if($_POST['action'] == 'additems'){
 
 if($_POST['action'] == 'updateitems'){
     require('dbconnect.php');
-
+    session_start();
     $number_item = $con->real_escape_string($_POST['number']);
     $id_item = $con->real_escape_string($_POST['id_item']);
 
@@ -51,6 +51,10 @@ if($_POST['action'] == 'updateitems'){
 
     $sql = "UPDATE item SET number_item = '$update' WHERE id_item = '$id_item'";
     $result = $con->query($sql);
-    header('location: ../pages/additems.php?info=เพิ่มข้อมูลเรียบร้อย');
 
+    $data = $row['name_item'].'-'. $number_item .'-'.$row['number_item'];
+
+    $sql = "INSERT INTO note (type_note,datetime_note,id_staff,content_note,name_staff) values('additem',NOW(),'".$_SESSION['id_staff']."','$data','".$_SESSION['name_staff']."')";
+    $result = $con->query($sql);
+    header('location: ../pages/additems.php?info=เพิ่มข้อมูลเรียบร้อย');
 }

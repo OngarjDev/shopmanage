@@ -1,10 +1,13 @@
 <?php
 session_start();
 require_once('../vendor/tecnickcom/tcpdf/tcpdf.php');
-require('../php_action/check.php');
 require_once('../php_action/dbconnect.php');
 
-
+session_start();
+if (!isset($_SESSION['id_staff']) || !isset($_SESSION['name_staff'])) {
+    header('location: login.php');
+}
+$id_staff = $_SESSION['id_staff'];
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8');
 
 $pdf->SetCreator('shopmanager by Ongarj Dev');

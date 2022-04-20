@@ -1,8 +1,13 @@
 <?php
-session_start();
 require_once('../vendor/tecnickcom/tcpdf/tcpdf.php');
-require('../php_action/check.php');
 require_once('../php_action/dbconnect.php');
+
+session_start();
+if (!isset($_SESSION['id_staff']) || !isset($_SESSION['name_staff'])) {
+    header('location: login.php');
+}
+$id_staff = $_SESSION['id_staff'];
+$name_staff = $_SESSION['name_staff'];
 
 if ($_GET['noworder'] && $_GET['transfer']) {
     $id_history = $_GET['noworder'];
@@ -43,6 +48,7 @@ $fname = $row['fname_staff'];
 $lname = $row['lname_staff'];
 $number = $row['number_staff'];
 $date = $row['datetime_history'];
+$datetime = explode('.',$date);
 $income = $row['income_history'];
 if ($transfer == 'bank') {
     $tran = 'ธนาคาร';
@@ -52,7 +58,7 @@ if ($transfer == 'cash') {
 }
 $content = <<<END
     <p>ชื่อพนักงาน  : $fname    $lname       รหัสพนักงาน :  $number </p>
-    <p>วัน-เวลาที่ซื้อสินค้า :  $date</p>
+    <p>วัน-เวลาที่ซื้อสินค้า :  $datetime[0]</p>
     <p>เลขที่ใบชำระเงิน :  $id_history </p>
     <p>ช่องทางการชำระเงิน :  $tran</p>
 END;
