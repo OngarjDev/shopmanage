@@ -127,6 +127,7 @@
                                                     $values_table = explode(",", $row['values_item']);
                                                     $price_table = explode(",", $row['price_item']);
                                                     $num_table = count($name_table);
+
                                                     for ($i = 0; $i < $num_table; $i++) { ?>
                                                         <tr>
                                                             <td><?= $i + 1 ?></td>
@@ -136,8 +137,9 @@
                                                         </tr>
                                                     <?php } ?>
                                                     <tr>
-                                                        <td colspan="3">ทั้งหมด : <?= $i ?> รายการ</td>
-                                                        <td colspan="2">ราคาทั้งหมด : <?= $row['money_history'] ?></td>
+                                                        <td colspan="2">รวมทั้งหมด : <?= $i ?> รายการ</td>
+                                                        <td><?php echo array_sum($values_table) ?> ชิ้น</td>
+                                                        <td><?= $row['money_history'] ?> บาท</td>
                                                     </tr>
                                                 </tbody>
                                             </table>

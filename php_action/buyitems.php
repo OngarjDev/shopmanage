@@ -78,7 +78,6 @@ if ($_GET['action'] == 'finish') {
         array_push($price_item, $row['price_item']);
         array_push($number, $row['values_item']);
         array_push($id_item, $row['id_item']);
-        array_push($values_item, $row['values_item']);
     }
 
     for ($i = 0; $i < count($id_item); $i++) {
@@ -97,7 +96,7 @@ if ($_GET['action'] == 'finish') {
 
     $money = array_sum($multiply);
     $item = implode(",", $id_item);
-    $values = implode(",", $values_item);
+    $values = implode(",", $number);
     $name = implode(",", $name_item);
     $price = implode(",", $price_item);
 

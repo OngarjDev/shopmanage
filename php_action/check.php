@@ -22,4 +22,3 @@ $name_staff = $_SESSION['name_staff'];
     window.onload = updatetime();
     setInterval(checktime,3000000);
 </script>
-?>

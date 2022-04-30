@@ -30,7 +30,7 @@
                             </div>
                             <?php
                             require('../php_action/dbconnect.php');
-                            $sql = "SELECT * FROM staff WHERE id_staff = $id_staff";
+                            $sql = "SELECT fname_staff,lname_staff,number_staff,admin,date_staff,id_staff FROM staff WHERE id_staff = $id_staff";
                             $result = $con->query($sql);
                             $data_staff = $result->fetch_assoc();
                             ?>

@@ -44,37 +44,36 @@
                                     <div class="row">
                                         <?php
                                         require_once('../php_action/dbconnect.php');
-                                        $sql = "SELECT * FROM item";
+                                        $sql = "SELECT image_item,name_item,price_item,number_item,id_item,barcode FROM item";
                                         $result = $con->query($sql);
                                         while ($row = $result->fetch_assoc()) {
                                         ?>
                                             <div class="col-xl-3 col-lg-4 col-md-6 mb-3">
-                                                <div class="card h-100">
-                                                    <img src="<?= $row['image_item'] ?>" width="auto" class="bg-light">
-                                                    <div class="card-text">
-
-                                                        <h5 class="text-center mt-2"><?= $row['name_item'] ?></h5>
-                                                        <div class="text-muted text-center">
-                                                            <small>ราคา <?= $row['price_item'] ?> </small><small>จำนวน <?= $row['number_item'] ?></small>
-                                                        </div>
-                                                        <?php
-                                                        if ($row['number_item'] != 0) {
-                                                            require_once('../php_action/dbconnect.php');
-                                                            $product = $row['id_item'];
-                                                            session_start();
-                                                            $id_staff = $_SESSION['id_staff'];
-                                                            $sql_check = "SELECT * FROM cart WHERE id_item = '$product' AND id_staff = '$id_staff'";
-                                                            $result_check = $con->query($sql_check);
-                                                            if ($result_check->num_rows > 0) {
-                                                        ?>
-                                                            <button class="btn btn-danger w-100 rounded-0" disabled>สินค้าอยู่ในรายการ</button>
-                                                            <?php } else { ?>
-                                                                <button class="btn btn-success w-100 rounded-0" onclick="additemintable(this.value)" value="<?= $row['barcode'] ?>">เพิ่มลงในรายการ</button>
-                                                            <?php } ?>
-                                                        <?php } else { ?>
-                                                            <button class="btn btn-danger w-100 rounded-0" disabled>สินค้าหมด</button>
-                                                        <?php } ?>
+                                                <div class="card">
+                                                    <img src="<?= $row['image_item'] ?>" width="auto" class="bg-light card-img-top">
+                                                    <div class="text-body">
+                                                        <h5 class="mx-auto mt-2" style="display: block;width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;text-align:center;"><?= $row['name_item'] ?></h5>
                                                     </div>
+                                                    <div class=" text-center mb-5">
+                                                        <small>ราคา <?= $row['price_item'] ?> </small><small>จำนวน <?= $row['number_item'] ?></small>
+                                                    </div>
+                                                    <?php
+                                                    if ($row['number_item'] != 0) {
+                                                        require_once('../php_action/dbconnect.php');
+                                                        $product = $row['id_item'];
+                                                        session_start();
+                                                        $id_staff = $_SESSION['id_staff'];
+                                                        $sql_check = "SELECT id_item FROM cart WHERE id_item = '$product' AND id_staff = '$id_staff'";
+                                                        $result_check = $con->query($sql_check);
+                                                        if ($result_check->num_rows > 0) {
+                                                    ?>
+                                                            <button class="btn btn-danger w-100 rounded-0" disabled>สินค้าอยู่ในรายการ</button>
+                                                        <?php } else { ?>
+                                                            <button class="btn btn-success w-100 rounded-0" onclick="additemintable(this.value)" value="<?= $row['barcode'] ?>">เพิ่มลงในรายการ</button>
+                                                        <?php } ?>
+                                                    <?php } else { ?>
+                                                        <button class="btn btn-danger w-100 rounded-0" disabled>สินค้าหมด</button>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
                                         <?php } ?>
@@ -85,7 +84,8 @@
                     </div>
                 </div>
             </div>
-        </main>
+    </div>
+    </main>
     </div>
     </div>
     <script src="../js/ajax/buyitem.js"></script>

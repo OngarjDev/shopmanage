@@ -25,7 +25,7 @@ class check
     {
         /// บันทึกเวลาออกพนักงาน
         require('dbconnect.php');
-        $sql = "SELECT * FROM note WHERE id_staff = '$id_staff' AND type_note = 'login'";
+        $sql = "SELECT datetime_note,id_note FROM note WHERE id_staff = '$id_staff' AND type_note = 'login'";
         $result = $con->query($sql);
         $row = $result->fetch_assoc();
 

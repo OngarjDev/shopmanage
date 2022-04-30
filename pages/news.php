@@ -61,6 +61,7 @@
                                     ?>
                                     <p class="mt-2 mb-0">ลงวันที่-เวลา : <?php echo $row['datetime_News']; ?></p>
                                 </div>
+                                <button class="btn btn-danger" onclick="deletenews(<?= $row['id_News'] ?>)">ลบข้อมูล</button>
                             </div>
                         <?php } ?>
                     </div>
@@ -68,6 +69,18 @@
         </main>
     </div>
     </div>
+    <script>
+        function deletenews(id_News) {
+            if (confirm("โปรดตรวจสอบให้แน่ใจ ก่อนลบบัญชีถาวร")) {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("POST", "../php_action/news.php");
+                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xmlhttp.send("action=deletenews&id_news=" + id_News);
+                window.location = window.location.href;
+                alert("ระบบได้ ลบเรียบร้อยแล้ว");
+            }
+        }
+    </script>
     <?php include('../php_action/scripts.php') ?>
 </body>
 

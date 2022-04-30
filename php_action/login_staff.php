@@ -23,13 +23,13 @@ if (isset($_POST['form']) && $_POST['form'] == 'login') {
                 $result = $con->query($sql);
                 header('location: ../pages/index.php');
             } else {
-                $sql = "SELECT * FROM staff WHERE id_staff = '$data_staff[id_staff]' AND (datelogin_staff + INTERVAL 30 MINUTE) < Now()";
+                $sql = "SELECT id_staff FROM staff WHERE id_staff = '$data_staff[id_staff]' AND (datelogin_staff + INTERVAL 30 MINUTE) < Now()";
                 $result = $con->query($sql);
                 if ($result->num_rows == 1) {
                     $sql = "UPDATE staff SET login_staff = 1,datelogin_staff = Now() WHERE id_staff = '$data_staff[id_staff]'";
                     $result = $con->query($sql);
 
-                    $sql = "SELECT * FROM note WHERE id_staff = '" . $_SESSION['id_staff'] . "' AND type_note = 'login'";
+                    $sql = "SELECT datetime_note FROM note WHERE id_staff = '" . $_SESSION['id_staff'] . "' AND type_note = 'login'";
                     $result = $con->query($sql);
                     $row = $result->fetch_assoc();
 

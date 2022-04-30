@@ -23,7 +23,7 @@
                         <h4 class="text-center mt-2">ประเภทสินค้า <a href="from-item.php?fromtype=group"><img src="../image/system/icons8-add-64.png" width="19"></a></h4>
                         <?php
                         require_once('../php_action/dbconnect.php');
-                        $sql = "SELECT * FROM category where type_category = 'group'";
+                        $sql = "SELECT name_category,id_category FROM category where type_category = 'group'";
                         $result = $con->query($sql);
                         if ($result->num_rows < 1) {
                             echo "<h6>ไม่พบประเภทสินค้า คุณสามารถเพิ่มได้ที่เครื่องหมายบวกด้านบน</h6>";
@@ -39,7 +39,7 @@
                         <h4 class="text-center mt-2">แบรนด์ <a href="from-item.php?fromtype=brand"><img src="../image/system/icons8-add-64.png" width="19"></a></h4>
                         <?php
                         require_once('../php_action/dbconnect.php');
-                        $sql = "SELECT * FROM category where type_category = 'brand'";
+                        $sql = "SELECT name_category,id_category FROM category where type_category = 'brand'";
                         $result = $con->query($sql);
                         if ($result->num_rows < 1) {
                             echo "<h6>ไม่พบแบรนด์ให้เลือก คุณสามารถเพิ่มได้ที่เครื่องหมายบวกด้านบน</h6>";

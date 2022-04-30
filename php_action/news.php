@@ -13,3 +13,10 @@ if ($_POST['action'] == 'addnews') {
     $result=$con->query($sql);
     header('location: ../pages/news.php');
 }
+if($_POST['action'] == 'deletenews'){
+    require_once('dbconnect.php');
+    $id_news = $con->real_escape_string($_POST['id_news']);
+    $sql = "DELETE FROM news WHERE id_News = '$id_news'";
+    $result=$con->query($sql);
+    header('location: ../pages/news.php');
+}

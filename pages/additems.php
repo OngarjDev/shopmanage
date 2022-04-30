@@ -35,7 +35,7 @@
                                 <div class="card-header">
                                     <form action="additems.php" method="get">
                                         <label>ใส่รหัสคิวบาร์โค้ดลงในกล่องค้นหานี้</label>
-                                        <input type="search" class="form-control mt-2" name="barcode" id="" placeholder="ใส่รหัสคิวบาร์โค้ดลงในนี้ เพื่อตรวจสอบสินค้าว่าถูกเพิ่มในระบบหรือไม่ เช่น 8859333713345 เป็นต้น">
+                                        <input type="search" class="form-control mt-2" name="barcode" id="" placeholder="ใส่รหัสคิวบาร์โค้ดลงในนี้ เพื่อตรวจสอบสินค้าว่าถูกเพิ่มในระบบหรือไม่ เช่น 8859333713345 เป็นต้น" required>
                                         <input type="submit" class="btn btn-warning mt-2 w-100" value="ตรวจสอบ">
                                     </form>
                                 </div>
@@ -46,7 +46,7 @@
                         require('../php_action/dbconnect.php');
                         if (isset($_GET['barcode'])) :
                             $barcode = $con->real_escape_string($_GET['barcode']);
-                            $sql = "SELECT * FROM item WHERE barcode = '$barcode'";
+                            $sql = "SELECT id_item FROM item WHERE barcode = '$barcode'";
                             $result = $con->query($sql);
                             if ($result->num_rows == 1) {
                                 $row = $result->fetch_assoc();
