@@ -4,6 +4,9 @@
 <head>
     <title>ข่าวสาร</title>
     <?php
+    require('../php_action/classcheck.php');
+    $check = new check();
+    $check->securearea();
     require('../php_action/check.php');
     include('../php_action/bootstrap.php');
     ?>

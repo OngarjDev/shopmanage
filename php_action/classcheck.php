@@ -34,4 +34,11 @@ class check
         $sql = "UPDATE note SET type_note = 'logout',content_note = '$date_logout' WHERE id_note = '$row[id_note]' ";
         $con->query($sql);
     }
+    public function securearea()//ป้องกันการเข้าถึงหน้าผู้จัดการร้านค้าผ่านUrl โดยไม่มีสิทธิเข้าถึง
+    {
+        session_start();
+        if(!isset($_SESSION['admin'])){
+            header("location: ../pages/login.php?error=คุณไม่มีสิทธิเข้าถึงหน้าดังกล่าว");
+        }
+    }
 }
