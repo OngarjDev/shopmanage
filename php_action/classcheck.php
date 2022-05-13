@@ -9,7 +9,7 @@ class check
         require('dbconnect.php');
         $sql = "DELETE FROM history WHERE datetime_history < DATE_SUB(NOW(), INTERVAL 4 MONTH)";
         $con->query($sql);
-        $sql = "DELETE FROM note WHERE datetime_note < DATE_SUB(NOW(), INTERVAL 1 MONTH)";
+        $sql = "DELETE FROM note WHERE datetime_note < DATE_SUB(NOW(), INTERVAL 3 MONTH)";
         $con->query($sql);
         $sql = "DELETE FROM News WHERE datetime_News < DATE_SUB(NOW(), INTERVAL 5 MONTH)";
         $con->query($sql);

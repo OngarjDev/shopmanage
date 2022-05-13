@@ -38,13 +38,46 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="text-center mt-2">รายการสินค้า</h3>
+                                <button class="btn btn-primary w-100" onclick="if(filter.hidden == true){document.getElementById('filter').hidden = false;}else{document.getElementById('filter').hidden = true;}">กรองข้อมูลสินค้า</button>
+                                <form action="buyitem.php" method="get" id="filter" hidden>
+                                    <label>ประเภทสินค้า</label>
+                                    <select class="form-select" name="group">
+                                        <option value="nogroup">ไม่เลือกประเภทสินค้า</option>
+                                        <?php
+                                        require_once('../php_action/dbconnect.php');
+                                        $sql = "SELECT name_category FROM category WHERE type_category = 'group'";
+                                        $result = $con->query($sql);
+                                        while($row = $result->fetch_assoc()) {
+                                        ?>
+                                        <option value="<?= $row['name_category']?>"><?= $row['name_category']?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <label>แบรนด์</label>
+                                    <select class="form-select" name="brand">
+                                        <option value="nobrand">ไม่เลือกแบรนด์</option>
+                                        <?php
+                                        require_once('../php_action/dbconnect.php');
+                                        $sql = "SELECT name_category FROM category WHERE type_category = 'brand'";
+                                        $result = $con->query($sql);
+                                        while($row = $result->fetch_assoc()) {
+                                        ?>
+                                        <option value="<?= $row['name_category']?>"><?= $row['name_category']?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <input type="submit" value="กรองข้อมูลสินค้า" class="btn btn-info mt-3 w-100">
+                                </form>
                             </div>
                             <div class="card-body">
                                 <div class="container-xxl">
                                     <div class="row">
                                         <?php
                                         require_once('../php_action/dbconnect.php');
-                                        $sql = "SELECT image_item,name_item,price_item,number_item,id_item,barcode FROM item";
+                                        if((isset($_GET['brand']) && isset($_GET['group']) && ($_GET['brand'] != 'nobrand' || $_GET['group'] != 'nogroup'))){
+                                            $sql = "SELECT image_item,name_item,price_item,number_item,id_item,barcode FROM item WHERE group_item = '$_GET[group]' || brand_item = '$_GET[brand]'";
+                                        }
+                                        else{
+                                            $sql = "SELECT image_item,name_item,price_item,number_item,id_item,barcode FROM item";
+                                        }
                                         $result = $con->query($sql);
                                         while ($row = $result->fetch_assoc()) {
                                         ?>

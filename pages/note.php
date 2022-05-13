@@ -41,7 +41,7 @@
                                     </select>
                                     <input type="hidden" name="action" value="selectdata">
                                     <button class="btn btn-warning mt-3 w-100" type="submit">ค้นหาข้อมูลทั้งหมด</button>
-                                    <p class="text-center text-danger mt-3">โปรดทราบข้อมูลทั้งหมด มีอายุประมาณ 1 เดือน</p>
+                                    <p class="text-center text-danger mt-3">โปรดทราบข้อมูลทั้งหมด มีอายุประมาณ 3 เดือน</p>
                                 </form>
                             </div>
                         </div>

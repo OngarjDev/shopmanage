@@ -23,9 +23,9 @@ if (isset($_POST['form']) && $_POST['form'] == 'login') {
                 $result = $con->query($sql);
                 header('location: ../pages/index.php');
             } else {
-                $sql = "SELECT id_staff FROM staff WHERE id_staff = '$data_staff[id_staff]' AND (datelogin_staff + INTERVAL 30 MINUTE) < Now()";
+                $sql = "SELECT id_staff FROM staff WHERE id_staff = '$data_staff[id_staff]' AND (datelogin_staff + INTERVAL 10 MINUTE) < Now()";
                 $result = $con->query($sql);
-                if ($result->num_rows == 1) {
+                if ($result->num_rows == 1) { // หากต้องการปิดการลงทะเบียนซ้ำให้ ปิดเงื่อนไขนี้
                     $sql = "UPDATE staff SET login_staff = 1,datelogin_staff = Now() WHERE id_staff = '$data_staff[id_staff]'";
                     $result = $con->query($sql);
 

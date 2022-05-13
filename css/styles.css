@@ -3911,7 +3911,7 @@ textarea.form-control-lg {
 }
 
 .nav-tabs {
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid #1add34;
 }
 .nav-tabs .nav-link {
   margin-bottom: -1px;
@@ -3933,7 +3933,7 @@ textarea.form-control-lg {
 .nav-tabs .nav-item.show .nav-link {
   color: #495057;
   background-color: #fff;
-  border-color: #dee2e6 #dee2e6 #fff;
+  border-color: #1e5bdf #1e5bdf #fff;
 }
 .nav-tabs .dropdown-menu {
   margin-top: -1px;

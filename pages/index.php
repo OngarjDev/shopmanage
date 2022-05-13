@@ -61,26 +61,48 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-xl-7 col-lg-7 col-md-7">
-                                    <div class="card mb-3">
-                                        <div class="card-header bg-success text-white">
-                                            <h3 class="card-title text-center mt-2">สินค้าที่ต้องตรวจสอบ</h3>
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">ข่าวสาร</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="item-tab" data-bs-toggle="tab" data-bs-target="#item" type="button" role="tab" aria-controls="item" aria-selected="false">สินค้าที่ต้องตรวจสอบ</button>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <?php
+                                        $sql = "SELECT title_News,content_News,major_News,datetime_News FROM news ORDER BY datetime_news DESC LIMIT 5";
+                                        $result = $con->query($sql);
+                                        while ($row = $result->fetch_assoc()) {
+                                        ?>
+                                            <div class="card mb-3">
+                                               <div class="card-header">
+                                                   <?= $row['title_News'] ?>
+                                               </div>
+                                               <div class="card-body">
+                                                   <h5 class="card-title"><?= $row['content_News'] ?></h5>
+                                                   <p class="card-text">ความสำคัญ : <?php if($row['major_News'] == 1){ echo"สำคัญ"; }else{ echo"ทั่วไป";}?> , วันที่ลงข่าวสาร : <?= $row['datetime_News']?></p>
+                                               </div>
+                                            </div>
+                                            <?php } ?>
                                         </div>
-                                        <div class="card-body">
-                                            <?php
-                                            $sql = "SELECT name_item,number_item,barcode FROM item WHERE number_item <= 5 Limit 20";
+                                        <div class="tab-pane fade" id="item" role="tabpanel" aria-labelledby="item-tab">
+                                        <?php
+                                            $sql = "SELECT name_item,number_item,barcode FROM item WHERE number_item < 10 LIMIT 20";
                                             $result = $con->query($sql);
-                                            while ($row = $result->fetch_assoc()) :
+                                            while ($row = $result->fetch_assoc()) {
                                             ?>
-                                                <h5 class="card-title">ชื่อสินค้า <?= $row['name_item'] ?></h5>
-                                                <?php if($row['number_item'] > 0){?>
-                                                    <h5 class="card-title text-warning">จำนวนสินค้าที่กำลังจะหมด คงเหลือ<?= $row['number_item'] ?> ชิ้น</h5>
-                                                    <p>รหัสบาร์โค้ด : <?= $row['barcode']?></p>
-                                                <?php } else{?>
-                                                    <h5 class="card-title text-danger">สินค้าหมด</h5>
-                                                    <p>รหัสบาร์โค้ด : <?= $row['barcode']?></p>
-                                                <?php } ?>
-                                                <hr>
-                                            <?php endwhile ?>
+                                                <div class="card mb-3">
+                                                    <div class="card-header">
+                                                        <?= $row['name_item'] ?>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">จำนวนคงเหลือ <?= $row['number_item'] ?> ชิ้น</h5>
+                                                        <p class="card-text">รหัสบาร์โค้ด <?= $row['barcode'] ?></p>
+                                                    </div>
+                                                </div>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -99,9 +121,9 @@
                                                 $number_item = explode(',', $row['values_item']);
                                                 $count = count($name_item);
                                             ?>
-                                                <h3 class="text-center mt-2">หมายเลขคำสั่งซื้อ <?= $row['id_history'] ?></h3>
+                                                <h3 class="text-center mt-2" onclick="window.location.href = 'buyhistory.php?#<?= $row['id_history'] ?>r'">หมายเลขคำสั่งซื้อ <?= $row['id_history'] ?></h3>
                                                 <div class="container-fluid">
-                                                    <div class="row">
+                                                    <div class="row" onclick="window.location.href = 'buyhistory.php?#<?= $row['id_history'] ?>r'">
                                                         <div class="col-xl-6 col-lg-6 col-md-6">
                                                             <h5 class="text-primary">ชื่อสินค้า</h5>
                                                         </div>

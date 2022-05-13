@@ -49,8 +49,31 @@
                                             <h4>วันที่สร้างบัญชี : <?= $data_staff['date_staff'] ?></h4>
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-6">
+                                            <?php if (isset($_GET['info'])) { ?>
+                                                <div class="alert alert-success" role="alert">
+                                                    <?= $_GET['info'] ?>
+                                                </div>
+                                            <?php } ?>
+                                            <?php if (isset($_GET['error'])) { ?>
+                                                <div class="alert alert-danger" role="alert">
+                                                    <?= $_GET['error'] ?>
+                                                </div>
+                                            <?php } ?>
                                             <h5 class="text-center">จัดการบัญชี</h5>
-                                            <button class="btn btn-warning w-100" onclick="resetpassword()">เปลี่ยนรหัสผ่าน</button>
+                                            <button class="btn btn-success w-100" onclick="if(datauserform.hidden == true){document.getElementById('datauserform').hidden = false;}else{document.getElementById('datauserform').hidden = true;}">แก้ไขข้อมูลบัญชี</button>
+                                            <div id="datauserform" hidden>
+                                                <form action="../php_action/editprofile.php" method="post">
+                                                    <label class="form-lable mt-2">ชื่อ</label>
+                                                    <input class="form-control" type="text" name="fname" value="<?= $data_staff['fname_staff'] ?>" required>
+                                                    <label class="form-lable">นามสกุล</label>
+                                                    <input class="form-control" type="text" name="lname" value="<?= $data_staff['lname_staff'] ?>" required>
+                                                    <label class="form-lable">รหัสพนักงาน</label>
+                                                    <input class="form-control" type="text" name="number_staff" value="<?= $data_staff['number_staff'] ?>" required>
+                                                    <input type="hidden" name="action" value="editdata">
+                                                    <input type="submit" class="btn btn-danger w-100 mt-3" value="แก้ไขข้อมูลผู้ใช้">
+                                                </form>
+                                            </div>
+                                            <button class="btn btn-warning w-100 mt-2" onclick="if(formresetpassword.hidden == true){document.getElementById('formresetpassword').hidden = false;}else{document.getElementById('formresetpassword').hidden = true;}">เปลี่ยนรหัสผ่าน</button>
                                             <div id="formresetpassword" hidden>
                                                 <label class="form-lable mt-2">รหัสผ่านใหม่</label>
                                                 <input class="form-control" type="password" name="" id="password1" required>
@@ -71,10 +94,6 @@
     </div>
     <?php include('../php_action/scripts.php') ?>
     <script>
-        function resetpassword() {
-            document.getElementById('formresetpassword').hidden = false;
-        }
-
         function sendpassword() {
             var pass1 = document.getElementById('password1').value;
             var pass2 = document.getElementById('password2').value;
