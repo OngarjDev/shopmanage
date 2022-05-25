@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,13 +63,13 @@
     </div>
     <?php
     session_start();
-
-    require_once('../php_action/classcheck.php');
-    $Limit = new check();
-    $Limit->LimitData(); /// กำหนดระยะเวลาของข้อมูลจำกัดขนาดข้อมูล
-    $Limit->UpdateStatus($_SESSION['id_staff']); /// กำหนดสถานะออนไลน์กับ ออฟไลน์ของพนักงาน
-    $Limit->lognote($_SESSION['id_staff']); /// บันทึกเวลาออกพนักงาน
-
+    if(isset($_SESSION['id_staff'])){
+        require_once('../php_action/classcheck.php');
+        $Limit = new check();
+        $Limit->LimitData(); /// กำหนดระยะเวลาของข้อมูลจำกัดขนาดข้อมูล
+        $Limit->UpdateStatus($_SESSION['id_staff']); /// กำหนดสถานะออนไลน์กับ ออฟไลน์ของพนักงาน
+        $Limit->lognote($_SESSION['id_staff']); /// บันทึกเวลาออกพนักงาน
+    }
     session_destroy();
     ?>
     <script>

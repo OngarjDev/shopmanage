@@ -59,7 +59,7 @@ if ($_POST['action'] == 'unsuspend') {
 if ($_POST['action'] == 'search') {
     require_once('dbconnect.php');
     $keyword = $_POST['keyword'];
-    $sql = "SELECT * FROM staff WHERE fname_staff LIKE '%$keyword%' OR lname_staff LIKE '%$keyword%' OR number_staff LIKE '%$keyword%'";
+    $sql = "SELECT fname_staff,lname_staff,number_staff,id_staff FROM staff WHERE fname_staff LIKE '%$keyword%' OR lname_staff LIKE '%$keyword%' OR number_staff LIKE '%$keyword%' LIMIT 3";
     $result = $con->query($sql);
     $html1 = <<<ECHO
         <div class="card mt-2 bg-light">
@@ -69,8 +69,7 @@ if ($_POST['action'] == 'search') {
     echo $html1;
     $row_num = $result->num_rows;
     if ($row_num = $result->num_rows > 0) {
-        for ($i=0; $i < 3 && $i <= $row_num; $i++) { 
-        $row = $result->fetch_assoc();
+        while($row = $result->fetch_assoc()){
         $fname = $row['fname_staff'];
         $lname = $row['lname_staff'];
         $number = $row['number_staff'];
@@ -84,6 +83,7 @@ if ($_POST['action'] == 'search') {
         ECHO;
         echo $html2;
         }
+    }
     } else {
         echo "<h1 class='text-center'>ไม่มีผลลัพธ์ที่ตรงกับคำค้นหา</h1>";
     }
@@ -92,4 +92,3 @@ if ($_POST['action'] == 'search') {
     </div>
     ECHO;
     echo $html3;
-}

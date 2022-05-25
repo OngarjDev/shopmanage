@@ -24,8 +24,8 @@ $pdf->SetTitle('ใบเสร็จชำระเงิน    เลขที
 $pdf->SetSubject('ใบเสร็จชำระเงิน กำกับสินค้า');
 $pdf->SetKeywords('ใบเสร็จชำระเงิน, TCPDF, PDF ,' . $id_history);
 
-$pdf->setHeaderFont(array('freeserif', '2', 15));
-$pdf->setFooterFont(array('freeserif', '2', 15));
+$pdf->setHeaderFont(array('thsarabun', '2', 22));
+$pdf->setFooterFont(array('thsarabun', '2', 15));
 
 $pdf->SetHeaderData(false, false, 'บริษัท Github: Ongarj Dev จำกัด มหาชน                              ใบเสร็จชำระเงิน', ' สาขา กรุงเทพ  เลขที่สาขา 258849 เบอร์ติดต่อ 00000000000');
 $pdf->setFooterData(array(0, 64, 0), array(0, 64, 128));
@@ -38,7 +38,7 @@ $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 $pdf->AddPage();
 
 
-$pdf->SetFont('freeserif', '2', 13);
+$pdf->SetFont('thsarabun', '2', 15);
 
 $sql = "SELECT * FROM history INNER JOIN staff ON history.id_staff = staff.id_staff WHERE history.id_history = '$id_history'";
 $result = $con->query($sql);
@@ -119,7 +119,7 @@ $content .= <<<TABLE
     <td colspan="2">ราคาทั้งหมด  $sumprice บาท</td>
 </tr>
     </table>
-    <p>***ก่อนออกจากร้าน โปรดตรวจสอบรายละเอียดอีกครั้ง***</p>
+    <p>*** ก่อนออกจากร้าน โปรดตรวจสอบรายละเอียดอีกครั้ง มิฉะนั้นข้อมูลทุกอย่างถูกต้อง ***</p>
 TABLE;
 
 $style = array(

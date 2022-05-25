@@ -7,7 +7,7 @@ class check
     {
         /// กำหนดระยะเวลาของข้อมูลจำกัดขนาดข้อมูล
         require('dbconnect.php');
-        $sql = "DELETE FROM history WHERE datetime_history < DATE_SUB(NOW(), INTERVAL 4 MONTH)";
+        $sql = "DELETE FROM history WHERE datetime_history < DATE_SUB(NOW(), INTERVAL 12 MONTH)";//อย่าต่ำกว่า 12เดือน เพราะจะแสดงกราฟไม่ครบทุกเดือน
         $con->query($sql);
         $sql = "DELETE FROM note WHERE datetime_note < DATE_SUB(NOW(), INTERVAL 3 MONTH)";
         $con->query($sql);

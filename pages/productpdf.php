@@ -15,10 +15,10 @@ $pdf->SetAuthor('Ongarj Dev(github)');
 $pdf->SetTitle('รายการสินค้าทั้งหมด');
 $pdf->SetKeywords('รายการสินค้าทั้งหมด, TCPDF, PDF');
 
-$pdf->setHeaderFont(array('freeserif', '2', 15));
-$pdf->setFooterFont(array('freeserif', '2', 15));
+$pdf->setHeaderFont(array('thsarabun', '2', 25));
+$pdf->setFooterFont(array('thsarabun', '2', 15));
 
-$pdf->SetHeaderData(false, false, 'บริษัท Github: Ongarj Dev จำกัด มหาชน                     ใบรายการสินค้าทั้งหมด', ' สาขา กรุงเทพ  เลขที่สาขา 258849 เบอร์ติดต่อ 00000000000');
+$pdf->SetHeaderData(false, false, 'บริษัท Github: Ongarj Dev จำกัด มหาชน                    ', ' สาขา กรุงเทพ  เลขที่สาขา 258849 เบอร์ติดต่อ 00000000000');
 $pdf->setFooterData(array(0, 64, 0), array(0, 64, 128));
 
 $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
@@ -27,7 +27,7 @@ $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 $pdf->AddPage();
 
-$pdf->SetFont('freeserif', '2', 13);
+$pdf->SetFont('thsarabun', '2', 13);
 date_default_timezone_set('asia/bangkok');
 $pdf->Cell(0, 0, date('d-m-Y h:i:s') . '(เวลาประเทศไทย)', 0, 2, 'R');
 $html = <<<ECHO
