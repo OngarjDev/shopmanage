@@ -16,7 +16,7 @@
     ?>
     <div id="layoutSidenav_content">
         <main>
-            <h3 class="text-center mt-3">คู่มือการใช้งาน เวอร์ชั่น 1.0 (ภาษาไทย)</h3>
+            <h3 class="text-center mt-3">คู่มือการใช้งาน เวอร์ชั่น 1.5 (ภาษาไทย)</h3>
             <div class="card mx-auto w-50">
                 <div class="card-body text-center">
                     <h6>แบบออฟไลน์</h6>
