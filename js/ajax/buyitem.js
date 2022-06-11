@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 function autosearch(keyword, page) {
     var url = '../php_action/buyitem.php?action=search&page=' + page + '&keyword=' + keyword;
     var xmlhttp = new XMLHttpRequest();
@@ -103,68 +102,4 @@ function updatenumber_item(id_item, values, page) {
     } else {
         window.location.replace('../php_action/buyitem.php?action=updatenumber_item&id_item=' + id_item + '&values=' + values + '&page=' + page);
     }
-=======
-function loadtable() {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("data").innerHTML = this.responseText;
-        }
-    }
-    xmlhttp.open("GET", "../php_action/showtable.php?action=repage");
-    xmlhttp.send();
-}
-
-function repage(page) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "../php_action/buyitems.php?action=repage&page="+ page);
-    xmlhttp.send();
-    loadtable();
-}
-
-function additemintable(word) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("livesearch").innerHTML = this.responseText;
-        }
-    }
-    xmlhttp.open("GET", "../php_action/buyitems.php?action=addtable&keyword=" + word);
-    xmlhttp.send();
-    window.location = window.location.href;
-}
-
-function checkbarcode(Keyboard){
-    if (Keyboard.keyCode == 13) {
-        additemintable()
-    }
-}
-
-
-function delectcart(id_staff, action) {
-    if (confirm("โปรดยืนยัน อีกครั้งเพื่อลบข้อมูลในระบบ") == true) {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "../php_action/buyitems.php?action=deletedata&id_staff=" + id_staff + "&actions=" + action);
-        xmlhttp.send();
-        loadtable();
-        window.location = window.location.href;
-    } else {
-    }
-}
-
-function addnumber_item(number, id_item, id_staff) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "../php_action/buyitems.php?action=number_item&number=" + number + "&id_item=" + id_item + "&id_staff=" + id_staff);
-    xmlhttp.send();
-    loadtable();
-}
-
-function buyitems(){
-    if(confirm("โปรดยืนยัน คำสั้งซื้ออีกครั้ง") == true){
-        window.location.href = '../php_action/buyitems.php?action=finish&bank=bank';
-    }
-}
-function showform(){
-    document.getElementById('form-hidden').removeAttribute("hidden");
->>>>>>> 2856649ca7bf589cd8c5976ab14e7a58e7915552
 }
