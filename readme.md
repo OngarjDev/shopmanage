@@ -1,6 +1,6 @@
 # shopmanage
 เว็บการจัดการหน้าร้านค้า สร้างโดย OngarjDev<br>
-ติดต่อสอบถามได้ที่ [facebook](https://www.facebook.com/WebProjectThailand)
+ติดต่อสอบถามได้ที่ [facebook](https://www.facebook.com/profile.php?id=100020639953885)
 คุณสามารถดูคู่มือได้ที่ โฟลเดอร์ document
 
 ## **ภายใน Document จะประกอบไปด้วย**
