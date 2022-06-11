@@ -23,9 +23,7 @@
                     <a href="../document/1.0.pdf" class="text-decoration-none" target="_blank">สำหรับ การใช้งานระบบ</a>
                 </div>
             </div>
-    </div>
-    </main>
-    </div>
+        </main>
     </div>
     <?php include('../php_action/scripts.php') ?>
 </body>

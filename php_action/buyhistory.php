@@ -22,8 +22,9 @@ if ($_POST['action'] == 'image') {
 }
 if ($_GET['action'] == 'search') {
     $keyword = $_GET['keyword'];
+    session_start();
     require_once('dbconnect.php');
-    $sql = "SELECT * FROM history WHERE id_history = '$keyword' OR pin_history = '$keyword'";
+    $sql = "SELECT * FROM history WHERE id_history = '$keyword' OR pin_history = '$keyword' AND id_staff = ". $_SESSION['id_staff'] ." AND datetime_history > DATE_SUB(NOW(), INTERVAL 24 Hour)";
     $result = $con->query($sql);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();

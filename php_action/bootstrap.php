@@ -7,8 +7,6 @@
 <!-- for template -->
 <link href="../css/styles.css" rel="stylesheet">
 
-<!-- for icon template -->
-
 <!-- setup template -->
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -17,5 +15,6 @@
 <meta http-equiv="refresh" content="" />
 <meta name="author" content="" />
 <link rel="icon" href="../image/system/icon-title.png" type="image/x-icon">
-<script src="../node_modules/sweetalert2/"></script>
-<link rel="stylesheet" href="sweetalert2.min.css">
+
+<!-- for New alert-->
+<link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.min.css">

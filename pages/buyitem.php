@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="btn-group me-2 my-2" role="group">
                                     <?php
-                                    $checkpage_sql = "SELECT * FROM item";
+                                    $checkpage_sql = "SELECT id_item FROM item";
                                     $checkpage_result = $con->query($checkpage_sql);
                                     $total_record = mysqli_num_rows($checkpage_result);
                                     $total_page = ceil($total_record / $limititempage);
@@ -99,7 +99,7 @@
                                             <?= $_GET['message'] ?>
                                         </div>
                                         <?php endif ?>
-                                        <input class="form-control" type="text" id="searchaddbarcode" onkeyup="autosearch(this.value,<?= $_GET['page'] ?>)" onkeypress="return checkenter(this.value,event,<?= $_GET['page'] ?>)" placeholder="ใส่ชื่อสินค้า หรือ รหัสบาร์โค้ดที่นี่ เพื่อเพิ่มลงในตะกร้า(รองรับเครื่องอ่านบาร์โค้ด)">
+                                        <input class="form-control" type="text" id="searchaddbarcode" onkeyup="autosearch(this.value,<?php echo $page ?>)" onkeypress="return checkenter(this.value,event,<?php echo $page ?>)" placeholder="ใส่ชื่อสินค้า หรือ รหัสบาร์โค้ดที่นี่ จากนั้นกด Enter">
                                         <div id="resultsearch">
                                             
                                         </div>
@@ -129,10 +129,10 @@
                                                         <tr>
                                                             <td><?= $i ?></td>
                                                             <td><?= $rowcart['name_item'] ?></td>
-                                                            <td><input type="number" class="form-control w-100" value="<?= $rowcart['values_item'] ?>"></td>
+                                                            <td><input type="text" onchange="updatenumber_item(<?= $rowcart['id_item']?>,this.value,<?= $page ?>)" class="form-control w-100" value="<?= $rowcart['values_item'] ?>"></td>
                                                             <td><?= $rowcart['price_item'] ?> บาท</td>
                                                             <td><?= $rowcart['values_item'] * $rowcart['price_item'] ?> บาท</td>
-                                                            <td><a class="btn btn-danger w-100" href="../php_action/buyitem.php?action=delete&id_item=<?= $rowcart['id_item'] ?>">ลบสินค้า</a></td>
+                                                            <td><a class="btn btn-danger w-100" onclick="deletecart(<?= $rowcart['id_item'] ?>,<?= $page ?>)">ลบสินค้า</a></td>
                                                         </tr>
                                                     <?php
                                                         $i++;
@@ -148,12 +148,16 @@
                                                         <td colspan="2">รายการทั้งหมด <?= $i - 1 ?> รายการ</td>
                                                         <td class="text-center">จำนวน <?= array_sum($numberall_array) ?> ชิ้น</td>
                                                         <td colspan="2">ราคารวม <?php echo $taxsum + array_sum($priceall_array) ?> บาท</td>
-                                                        <td><a class="btn btn-danger w-100" href="../php_action/buyitem.php?action=alldelete">นำออกทั้งหมด</a></td>
+                                                        <td><a class="btn btn-danger w-100" onclick="deleteallcart(<?= $page ?>)">นำออกทั้งหมด</a></td>
                                                     </tr>
                                                 </tfoot>
                                             </table>
                                         </div>
+                                        <?php if($i <= 1){?>
+                                            <a class="btn btn-warning w-100" disabled>กรุณาเลือกสินค้า ก่อนทำรายการ</a>
+                                        <?php }else{ ?>
                                         <a class="btn btn-success w-100" href="payment.php">ชำระเงิน</a>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>

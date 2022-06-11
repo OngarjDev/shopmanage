@@ -1,5 +1,5 @@
-function autosearch(keyword,page) {
-    var url = '../php_action/buyitem.php?action=search&page='+ page +'&keyword=' + keyword;
+function autosearch(keyword, page) {
+    var url = '../php_action/buyitem.php?action=search&page=' + page + '&keyword=' + keyword;
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function () {
         if (keyword.length != 0) {
@@ -18,15 +18,88 @@ function autosearch(keyword,page) {
     xmlhttp.open('GET', url);
     xmlhttp.send();
 }
-function checkenter(keyword, Keyboard ,page) {
+function checkenter(keyword, Keyboard, page) {
     if (Keyboard.keyCode == 13) {
-        sendaddcart(keyword,page);
+        sendaddcart(keyword, page);
     }
 }
-function sendaddcart(keyword,page) {
-    if(keyword.length != 0){ /// สาเหตุที่ไม่ส่งแบบ ajax เพราะว่า ajax ส่งมาเฉพาะข้อมูลที่ต้องการไม่ได้อัพเดตตะกร้าให้ใหม่
+function sendaddcart(keyword, page) {
+    if (keyword.length != 0) {
         window.location.replace('../php_action/buyitem.php?action=additembysearch&keyword=' + keyword + '&page=' + page);
-    }else{
+    } else {
         alert("โปรดใส่ข้อมูลก่อนกดปุ่มEnterยืนยัน");
     }
 };
+function deletecart(id_item, page) {
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success me-2',
+            cancelButton: 'btn btn-danger me-2'
+        },
+        buttonsStyling: false
+    })
+    swalWithBootstrapButtons.fire({
+        title: 'คุณยืนยันที่จะลบหรือไม่?',
+        text: "การกระทำนี้จะไม่สามารถกู้คืนได้!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'ยืนยันที่จะลบ!',
+        cancelButtonText: 'ยกเลิกการกระทำ',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.replace('../php_action/buyitem.php?action=delete&id_item=' + id_item + '&page=' + page);
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+                'การลบถูกยกเลิก',
+                'ระบบถูกยกเลิกการลบข้อมูลโดยผู้ใช้',
+                'error'
+            )
+        }
+    })
+}
+function deleteallcart(page) {
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success me-2',
+            cancelButton: 'btn btn-danger me-2'
+        },
+        buttonsStyling: false
+    })
+    swalWithBootstrapButtons.fire({
+        title: 'คุณยืนยันที่จะลบหรือไม่?',
+        text: "การกระทำนี้จะไม่สามารถกู้คืนได้!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'ยืนยันที่จะลบ!',
+        cancelButtonText: 'ยกเลิกการกระทำ',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.replace('../php_action/buyitem.php?action=alldelete&page=' + page);
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire(
+                'การลบถูกยกเลิก',
+                'ระบบถูกยกเลิกการลบข้อมูลโดยผู้ใช้',
+                'error'
+            )
+        }
+    })
+}
+function updatenumber_item(id_item, values, page) {
+    if (values < 0) {
+        Swal.fire(
+            'ระบบไม่สามารถเพิ่มจำนวนสินค้าได้',
+            'โปรดตรวจสอบจำนวนที่คุณใส่ไปอีกครั้ง ว่ามีสถานะติดลบหรือไม่',
+            'error'
+        )
+    } else {
+        window.location.replace('../php_action/buyitem.php?action=updatenumber_item&id_item=' + id_item + '&values=' + values + '&page=' + page);
+    }
+}
