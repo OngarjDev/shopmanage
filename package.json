@@ -1,10 +1,6 @@
 {
   "dependencies": {
-<<<<<<< HEAD
     "chart.js": "^3.7.1",
     "sweetalert2": "^11.4.17"
-=======
-    "chart.js": "^3.7.1"
->>>>>>> 2856649ca7bf589cd8c5976ab14e7a58e7915552
   }
 }
