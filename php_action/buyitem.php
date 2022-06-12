@@ -120,7 +120,6 @@ if ($_GET['action'] == 'payment') {
     $name = implode(",", $name_item);
     $price = implode(",", $price_item);
 
-    $pin = $id_staff + rand() + $money; //รหัสบาร์โค้ดสินค้าประกอบไปด้วย รหัสพนักงาน + จำนวนสินค้า + รหัสสุ่ม เพื่อป้องกันการปลอมแปลงข้อมูล
     $sql_staff = "SELECT fname_staff,lname_staff FROM staff WHERE id_staff = '$id_staff'";
     $result_staff = $con->query($sql_staff);
     $row_staff = $result_staff->fetch_assoc();
@@ -128,7 +127,7 @@ if ($_GET['action'] == 'payment') {
 
     if ($_GET['bank'] == 'bank') {
         if ($_GET['image'] == 'noimage') {
-            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,money_history,pin_history,name_item,price_item,fullname_staff) values('$id_staff','$item','$values',NOW(),'bank',$money,$pin,'$name','$price','$fullname')";
+            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,money_history,name_item,price_item,fullname_staff) values('$id_staff','$item','$values',NOW(),'bank',$money,'$name','$price','$fullname')";
             $result = $con->query($sql);
         }
         if ($_GET['image'] == 'image') {
@@ -138,7 +137,7 @@ if ($_GET['action'] == 'payment') {
 
             move_uploaded_file($_FILES['image']['tmp_name'], $upload);
 
-            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,money_history,pin_history,name_item,price_item,fullname_staff,image_history) values('$id_staff','$item','$values',NOW(),'bank',$money,$pin,'$name','$price','$fullname','$upload')";
+            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,money_history,name_item,price_item,fullname_staff,image_history) values('$id_staff','$item','$values',NOW(),'bank',$money,'$name','$price','$fullname','$upload')";
             $result = $con->query($sql);
         }
     }
