@@ -55,6 +55,12 @@ $pdf->writeHTML($shoptitle, true, false, false, false, '');
 $pdf->selectColumn(1);
 $datenow = date('Y-m-d');
 $datetime = explode(' ',$row['datetime_history']);
+if($row['transfer_history'] == 'cash'){
+    $transfer = 'เงินสด';
+}
+if($row['transfer_history'] == 'bank'){
+    $transfer = 'โอนผ่านบัญชีธนาคาร';
+}
 $title = <<<EOF
 <style>
 h6 {
@@ -75,7 +81,7 @@ h6 {
 เวลาทำรายการ : $datetime[1]<br>
 ชื่อผู้ทำรายการ : $row[fname_staff] $row[lname_staff]<br>
 รหัสผู้ทำรายการ : $row[id_staff]
-ช่องทางชำระเงิน : $row[transfer_history]<br>
+ช่องทางชำระเงิน : $transfer<br>
 </div>
 EOF;
 
@@ -93,20 +99,54 @@ $table = <<<EOD
     <th>ราคา(ต่อชิ้น)</th>
     <th>ราคารวม</th>
 </tr>
-</table>
 EOD;
-$//รอแยกออกมาจากเป็นแต่ละชนิดไม่ใช่ array
-for ($i=0; $i < ; $i++) { 
+$name_item = explode(',',$row['name_item']);
+$amount_item = explode(',',$row['values_item']);
+$price_item = explode(',',$row['price_item']);
+$allprice_notax = [];
+$allnumber_item = [];
+for ($i=0; $i < count($name_item); $i++) { 
+    $priceall_item = $amount_item[$i] * $price_item[$i];
+    array_push($allprice_notax,$priceall_item);
+    array_push($allnumber_item,$amount_item[$i]);
+    $number = $i + 1;
     $table .= <<<EOD
 <tr>
-    <td>dad</td>
-    <td>dfasdf</td>
-    <td>dfasdf</td>
-    <td>dfasdf</td>
-    <td>dfasdf</td>
+    <td>$number</td>
+    <td>$name_item[$i]</td>
+    <td>$amount_item[$i]</td>
+    <td>$price_item[$i]</td>
+    <td>$priceall_item</td>
 </tr>
 EOD;
 }
+$money = array_sum($allprice_notax);
+$tax = $money * 0.07;
+$money_tax = $money + $tax;
+$allnumber_item = array_sum($allnumber_item);
+if($row['transfer_history'] == 'cash'){
+    $inputmoney = $row['income_history'];
+}
+if($row['transfer_history'] == 'bank'){
+    $inputmoney = $row['money_history'];
+}
+$table .= <<<EOD
+<tr>
+    <td colspan="2" align="center">จำนวนเงินที่ร้านค้าได้รับ $inputmoney บาท</td>
+    <td colspan="3" align="center">จำนวนเงินสินค้าทั้งหมด(ยังไม่รวมภาษี) $money บาท</td>
+</tr>
+EOD;
+
+$table .= <<<EOD
+<tr>
+    <td colspan="2" align="center">จำนวนรายการ $number รายการ</td>
+    <td align="center">$allnumber_item ชิ้น</td>
+    <td colspan="2" align="center">ราคาทั้งหมด(รวมภาษี) $money_tax บาท</td>
+</tr>
+EOD;
+$table .= <<<EOD
+</table>
+EOD;
 $pdf->writeHTML($table, true, true, true, false, ''); 
 
 //Close and output PDF document
