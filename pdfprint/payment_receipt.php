@@ -94,10 +94,10 @@ $table = <<<EOD
 <table border="1" align="center">
 <tr style="background-color:AliceBlue;">
     <th>ลำดับ</th>
-    <th>ชื่อสินค้า</th>
+    <th>รายการ</th>
     <th>จำนวน</th>
-    <th>ราคา(ต่อชิ้น)</th>
-    <th>ราคารวม</th>
+    <th>ราคาต่อหน่อย</th>
+    <th>จำนวนเงิน</th>
 </tr>
 EOD;
 $name_item = explode(',',$row['name_item']);
@@ -124,18 +124,6 @@ $money = array_sum($allprice_notax);
 $tax = $money * 0.07;
 $money_tax = $money + $tax;
 $allnumber_item = array_sum($allnumber_item);
-if($row['transfer_history'] == 'cash'){
-    $inputmoney = $row['income_history'];
-}
-if($row['transfer_history'] == 'bank'){
-    $inputmoney = $row['money_history'];
-}
-$table .= <<<EOD
-<tr>
-    <td colspan="2" align="center">จำนวนเงินที่ร้านค้าได้รับ $inputmoney บาท</td>
-    <td colspan="3" align="center">จำนวนเงินสินค้าทั้งหมด(ยังไม่รวมภาษี) $money บาท</td>
-</tr>
-EOD;
 
 $table .= <<<EOD
 <tr>
@@ -147,7 +135,11 @@ EOD;
 $table .= <<<EOD
 </table>
 EOD;
-$pdf->writeHTML($table, true, true, true, false, ''); 
 
+$pdf->writeHTML($table, true, true, true, false, ''); 
+$footer .= <<<EOD
+<p align="right">ลงชื่่อผู้รับเงิน.........................................</p>
+EOD;
+$pdf->writeHTML($footer, true, true, true, false, '');
 //Close and output PDF document
 $pdf->Output('ใบเสร็จแบบย่อ.pdf', 'I');
