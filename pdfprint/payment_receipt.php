@@ -5,7 +5,7 @@ require_once('../vendor/tecnickcom/tcpdf/tcpdf.php');
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // set document information
-$pdf->SetTitle('ใบเสร็จแบบย่อ');
+$pdf->SetTitle('ใบกำกับภาษีแบบย่อ');
 $pdf->SetKeywords('TCPDF, PDF,');
 
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
@@ -73,7 +73,7 @@ h6 {
     text-align: right;
 }
 </style>
-<h6>ใบเสร็จแบบย่อ</h6>
+<h6>ใบกำกับภาษีแบบย่อ</h6>
 <div class="details">
 รายการยืนยันเลขที่ : $id_history
 วันที่ออกใบเสร็จ : $datenow <br>
@@ -126,7 +126,7 @@ $money_tax = $money + $tax;
 $allnumber_item = array_sum($allnumber_item);
 
 $table .= <<<EOD
-<tr>
+<tr style="background-color:AliceBlue;">
     <td colspan="2" align="center">จำนวนรายการ $number รายการ</td>
     <td align="center">$allnumber_item ชิ้น</td>
     <td colspan="2" align="center">ราคาทั้งหมด(รวมภาษี) $money_tax บาท</td>

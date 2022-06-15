@@ -126,7 +126,7 @@ $money_tax = $money + $tax;
 $allnumber_item = array_sum($allnumber_item);
 
 $table .= <<<EOD
-<tr>
+<tr style="background-color:AliceBlue;">
     <td colspan="2" align="center">จำนวนรายการ $number รายการ</td>
     <td align="center">$allnumber_item ชิ้น</td>
     <td colspan="2" align="center">ราคาทั้งหมด(รวมภาษี) $money_tax บาท</td>

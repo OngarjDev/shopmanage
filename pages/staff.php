@@ -30,6 +30,7 @@
                                 <h3 class="text-center">ตัวกรอง พนักงาน</h3>
                                 <input type="search" name="" class="form-control" id="searchstaff" placeholder="ชื่อพนักงาน-นามสกุล,รหัสพนักงาน  อย่างใดอย่างหนึ่ง">
                                 <button class="btn btn-primary mt-2 w-100" onclick="search()">ค้นหาพนักงาน</button>
+                                <button class="btn btn-warning mt-2 w-100" onclick="window.location.href = 'addstaff.php'">เพิ่มพนักงาน</button>
                                 <div id="datasearch">
 
                                 </div>
