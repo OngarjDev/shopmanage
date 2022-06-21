@@ -39,7 +39,7 @@ if(!isset($_GET['id_history'])){
 $shoptitle = <<<EOD
 <style>
 h1{
-    font-size: 30px;
+    font-size: 31px;
     line-height: 64%
 }
 p{

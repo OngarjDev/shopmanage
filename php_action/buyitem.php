@@ -144,7 +144,7 @@ if ($_GET['action'] == 'payment') {
     if ($_GET['bank'] == 'cash') {
         $moneyincome = $_GET['money'];
         if ($moneyincome >= $money) {
-            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,money_history,pin_history,name_item,price_item,income_history,fullname_staff) values('$id_staff','$item','$values',NOW(),'cash',$money,$pin,'$name','$price',$moneyincome,'$fullname')";
+            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,money_history,name_item,price_item,income_history,fullname_staff) values('$id_staff','$item','$values',NOW(),'cash',$money,'$name','$price',$moneyincome,'$fullname')";
             $result = $con->query($sql);
         } else {
             header('location: ../pages/payment.php?message=' . 'จำนวนเงินที่รับไม่ถูกต้อง');
@@ -157,7 +157,6 @@ if ($_GET['action'] == 'payment') {
         $total = $row['number_item'] - $row['values_item']; ///ทำการลบจำนวนสินค้าในคลัง
         $sql_removeitem = "UPDATE item set number_item = '$total'  WHERE id_item = '$row[id_item]'";
         $result = $con->query($sql_removeitem);
-        echo $total;
     }
     $sql = "DELETE FROM cart WHERE id_staff = '$id_staff'";
     $result = $con->query($sql);

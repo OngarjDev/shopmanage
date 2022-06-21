@@ -21,7 +21,7 @@
                 <a class="btn btn-secondary" href="buyitem.php">กลับไปตะกร้าสินค้า</a>
                 <a class="btn btn-primary" href="buyhistory.php">ดูประวัติการซื้อสินค้า</a>
                 <a class="btn btn-secondary" href="../pdfprint/payment_receipt.php?id_history=<?= $_GET['id_history']?>">ใบเสร็จชำระเงิน</a>
-                <a class="btn btn-primary" href="../pdfprint/payment_tax.php?id_history=<?= $_GET['id_history']?>">ใบกำกับภาษี</a>
+                <a class="btn btn-primary" href="addcustomertax.php?id_history=<?= $_GET['id_history']?>">ใบกำกับภาษี</a>
             </div>
             <hr>
             <h3 class="text-center">รายละเอียดการชำระเงิน</h3>
