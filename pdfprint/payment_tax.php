@@ -87,8 +87,15 @@ EOF;
 
 $pdf->writeHTML($title, true, true, true, false, '');   // write the HTML into the PDF
 
-///ส่วนต่อไปนี้ คือ ส่วนของรายการสินค้า หรือ table
 $pdf->resetColumns();
+$user_show = <<<DATA
+<br>
+    ชื่อผู้ซื้อ $row[nametax_history]<br>
+    ที่อยู่(ผู้ซื้อ) $row[address_history]
+DATA;
+$pdf->writeHTML($user_show, true, true, true, false, ''); 
+
+///ส่วนต่อไปนี้ คือ ส่วนของรายการสินค้า หรือ table
 $table = <<<EOD
 <h1 align="center">รายการสั่งซื้อสินค้า</h1>
 <table border="1" align="center">
@@ -126,6 +133,14 @@ $money_tax = $money + $tax;
 $allnumber_item = array_sum($allnumber_item);
 
 $table .= <<<EOD
+<tr>
+<td colspan="2" align="center">ราคาเดิม</td>
+<td colspan="3" align="center">$money บาท</td>
+</tr>
+<tr>
+<td colspan="2" align="center">ภาษีมูลค่าเพิ่ม 7 %</td>
+<td colspan="3" align="center">$tax บาท</td>
+</tr>
 <tr style="background-color:AliceBlue;">
     <td colspan="2" align="center">จำนวนรายการ $number รายการ</td>
     <td align="center">$allnumber_item ชิ้น</td>
@@ -137,9 +152,19 @@ $table .= <<<EOD
 EOD;
 
 $pdf->writeHTML($table, true, true, true, false, ''); 
-$footer .= <<<EOD
-<p align="right">ลงชื่่อผู้รับเงิน.........................................</p>
+
+$pdf->setEqualColumns(2, 84);
+$pdf->selectColumn(1);
+$customer .= <<<EOD
+<p align="right">ลงชื่่อพนักงานรับเงิน.........................................</p>
 EOD;
-$pdf->writeHTML($footer, true, true, true, false, '');
+$pdf->writeHTML($customer, true, true, true, false, '');
+
+$pdf->selectColumn(2);
+$staff .= <<<EOD
+<p align="right">ลงชื่่อผู้ซื้อ.........................................</p>
+EOD;
+$pdf->writeHTML($staff, true, true, true, false, '');
+
 //Close and output PDF document
 $pdf->Output('ใบเสร็จแบบย่อ.pdf', 'I');
