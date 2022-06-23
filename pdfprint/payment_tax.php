@@ -167,4 +167,4 @@ EOD;
 $pdf->writeHTML($staff, true, true, true, false, '');
 
 //Close and output PDF document
-$pdf->Output('ใบเสร็จแบบย่อ.pdf', 'I');
+$pdf->Output('ใบเสร็จแบบเต็ม.pdf', 'I');

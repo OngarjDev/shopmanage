@@ -9,7 +9,7 @@
     ?>
 </head>
 
-<body class="sb-nav-fixed" onload="loaditem()">
+<body class="sb-nav-fixed">
     <?php
     include('../layout/nav.html');
     include('../layout/menu.html');
