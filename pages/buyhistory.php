@@ -41,12 +41,12 @@
                             <ul class="nav nav-tabs">
                                 <?php
                                 switch($_GET['active_menu']){
-                                case "true":?>
-                                    <?php endswitch ?>
-                                }
+                                //case "true":
+                                    
+                                
                                 ?>
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">ประวัติการซื้อสินค้า</a>
+                                    <a class="nav-link active" href="#">ประวัติการซื้อสินค้า</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">ประวัติไม่ได้รับการยืนยัน</a>
