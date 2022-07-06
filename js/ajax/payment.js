@@ -66,7 +66,8 @@ function calculator(paycash,total) {
         document.getElementById('textchange').classList.remove('text-danger');
         document.getElementById('ageepaycash').removeAttribute('disabled');
     }else if(paycash < total){
-        document.getElementById('textchange').textContent = 'จำนวนเงินที่ชำระไม่ถูกต้อง โปรดใส่จำนวนเงินที่มากกว่านี้';
+    var change = total - paycash;
+        document.getElementById('textchange').textContent = 'จำนวนเงินที่ชำระไม่ถูกต้อง จำนวนเงินไม่เพียงพอ';
         document.getElementById('textchange').classList.add('text-danger');
         document.getElementById('textchange').classList.remove('text-success');
         document.getElementById('ageepaycash').setAttribute('disabled','True');

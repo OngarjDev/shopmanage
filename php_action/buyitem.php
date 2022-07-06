@@ -127,7 +127,7 @@ if ($_GET['action'] == 'payment') {
 
     if ($_GET['bank'] == 'bank') {
         if ($_GET['image'] == 'noimage') {
-            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,money_history,name_item,price_item,fullname_staff) values('$id_staff','$item','$values',NOW(),'bank',$money,'$name','$price','$fullname')";
+            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,name_item,price_item,fullname_staff) values('$id_staff','$item','$values',NOW(),'bank','$name','$price','$fullname')";
             $result = $con->query($sql);
         }
         if ($_GET['image'] == 'image') {
@@ -137,14 +137,14 @@ if ($_GET['action'] == 'payment') {
 
             move_uploaded_file($_FILES['image']['tmp_name'], $upload);
 
-            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,money_history,name_item,price_item,fullname_staff,image_history) values('$id_staff','$item','$values',NOW(),'bank',$money,'$name','$price','$fullname','$upload')";
+            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,name_item,price_item,fullname_staff,image_history) values('$id_staff','$item','$values',NOW(),'bank','$name','$price','$fullname','$upload')";
             $result = $con->query($sql);
         }
     }
     if ($_GET['bank'] == 'cash') {
         $moneyincome = $_GET['money'];
         if ($moneyincome >= $money) {
-            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,money_history,name_item,price_item,income_history,fullname_staff) values('$id_staff','$item','$values',NOW(),'cash',$money,'$name','$price',$moneyincome,'$fullname')";
+            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,name_item,price_item,income_history,fullname_staff) values('$id_staff','$item','$values',NOW(),'cash','$name','$price',$moneyincome,'$fullname')";
             $result = $con->query($sql);
         } else {
             header('location: ../pages/payment.php?message=' . 'จำนวนเงินที่รับไม่ถูกต้อง');

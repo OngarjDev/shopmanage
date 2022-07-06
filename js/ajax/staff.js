@@ -52,10 +52,22 @@ function unsuspend(id_staff) {
 function search() {
     var keyword = document.getElementById('searchstaff').value;
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("datasearch").innerHTML = this.responseText;
+    if (keyword != "") {
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("datasearch").innerHTML = this.responseText;
+            }
         }
+    } else {
+        Swal.fire({
+            title: 'โปรดกรอกข้อมูลพนักงาน ก่อนใช้งาน',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        })
     }
     xmlhttp.open("POST", "../php_action/staff.php");
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
