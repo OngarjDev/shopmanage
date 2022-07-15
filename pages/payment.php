@@ -54,14 +54,26 @@
                                     </tr>
                                 <?php
                                     $i++;
-                                endwhile
+                                endwhile;
+                                $sql_setting = "SELECT * FROM settings";
+                                $result_setting = $con->query($sql_setting);
+                                $row_setting = $result_setting->fetch_assoc();
+                                if ($row_setting['action_setting'] == 1) { // = 1 คือมีการเปิดใช้งานตั้งค่า tax7% 
+                                    $taxsum = round(array_sum($priceall_array) * 7 / 100);
+                                    $money = $taxsum + array_sum($priceall_array);
+                                } else {
+                                    $money = array_sum($priceall_array);
+                                }
                                 ?>
                             </tbody>
                             <tfoot>
-                                <tr>
-                                    <td colspan="3" class="text-center">ภาษีมูลค่าเพิ่ม(7%) <?= $taxsum = array_sum($priceall_array) * 7 / 100 ?> บาท</td>
-                                    <td colspan="3" class="text-center">ราคาสินค้าเดิม <?= array_sum($priceall_array) ?> บาท</td>
-                                </tr>
+                                <?php
+                                if ($row_setting['action_setting'] == 1) { ?>
+                                    <tr>
+                                        <td colspan="3" class="text-center">ภาษีมูลค่าเพิ่ม(7%) <?= $taxsum ?> บาท</td>
+                                        <td colspan="3" class="text-center">ราคาสินค้าเดิม <?= array_sum($priceall_array) ?> บาท</td>
+                                    </tr>
+                                <?php } ?>
                                 <tr>
                                     <td colspan="2">รายการทั้งหมด <?= $i - 1 ?> รายการ</td>
                                     <td class="text-center">จำนวน <?= array_sum($numberall_array) ?> ชิ้น</td>

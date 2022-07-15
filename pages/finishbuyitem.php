@@ -20,8 +20,18 @@
             <div class="btn-group w-100" role="group">
                 <a class="btn btn-secondary" href="buyitem.php">กลับไปตะกร้าสินค้า</a>
                 <a class="btn btn-primary" href="buyhistory.php">ดูประวัติการซื้อสินค้า</a>
-                <a class="btn btn-secondary" href="../pdfprint/payment_receipt.php?id_history=<?= $_GET['id_history']?>">ใบเสร็จชำระเงิน</a>
-                <a class="btn btn-primary" href="addcustomertax.php?id_history=<?= $_GET['id_history']?>">ใบกำกับภาษี</a>
+                <?php
+                require_once('../php_action/dbconnect.php');
+                $sql_setting = "SELECT * FROM settings WHERE id_setting = 1";
+                $result_setting = $con->query($sql_setting);
+                $row_setting = $result_setting->fetch_assoc();
+                if($row_setting['action_setting'] == 1){
+                ?>
+                    <a class="btn btn-secondary" href="../pdfprint/payment_receipt.php?id_history=<?= $_GET['id_history']?>">ใบเสร็จชำระเงิน</a>
+                    <a class="btn btn-primary" href="addcustomertax.php?id_history=<?= $_GET['id_history']?>">ใบกำกับภาษี</a>
+                <?php }else{?>
+                    <a class="btn btn-secondary" href="../pdfprint/payment_notax.php?id_history=<?= $_GET['id_history']?>">ใบเสร็จชำระเงิน</a>
+                <?php } ?>
             </div>
             <hr>
             <h3 class="text-center">รายละเอียดการชำระเงิน</h3>

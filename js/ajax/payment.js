@@ -61,7 +61,7 @@ function paymentbank() {
 function calculator(paycash,total) {
     var change = paycash - total;
     if(paycash >= total){
-        document.getElementById('textchange').textContent = 'จำนวนเงินทอน '+ Math.ceil(change) + ' บาท (หากมีเศษจะถูกปัดขึ้น)';
+        document.getElementById('textchange').textContent = 'จำนวนเงินทอน '+ Math.ceil(change) + ' บาท';
         document.getElementById('textchange').classList.add('text-success');
         document.getElementById('textchange').classList.remove('text-danger');
         document.getElementById('ageepaycash').removeAttribute('disabled');

@@ -122,7 +122,7 @@ EOD;
 }
 $money = array_sum($allprice_notax);
 $tax = $money * 0.07;
-$money_tax = $money + $tax;
+$money_tax = round($money + $tax);
 $allnumber_item = array_sum($allnumber_item);
 
 $table .= <<<EOD

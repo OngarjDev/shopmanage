@@ -128,7 +128,7 @@ for ($i=0; $i < count($name_item); $i++) {
 EOD;
 }
 $money = array_sum($allprice_notax);
-$tax = $money * 0.07;
+$tax = round($money * 0.07);
 $money_tax = $money + $tax;
 $allnumber_item = array_sum($allnumber_item);
 

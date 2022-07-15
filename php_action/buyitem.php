@@ -125,9 +125,13 @@ if ($_GET['action'] == 'payment') {
     $row_staff = $result_staff->fetch_assoc();
     $fullname = $row_staff['fname_staff'] . ' ' . $row_staff['lname_staff'];
 
+    $sql_setting = "SELECT * FROM settings WHERE id_setting = 1";
+    $result_setting = $con->query($sql_setting);
+    $row_setting = $result_setting->fetch_assoc();
+    
     if ($_GET['bank'] == 'bank') {
         if ($_GET['image'] == 'noimage') {
-            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,name_item,price_item,fullname_staff) values('$id_staff','$item','$values',NOW(),'bank','$name','$price','$fullname')";
+            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,name_item,price_item,fullname_staff,tax_setting) values('$id_staff','$item','$values',NOW(),'bank','$name','$price','$fullname',$row_setting[action_setting])";
             $result = $con->query($sql);
         }
         if ($_GET['image'] == 'image') {
@@ -137,14 +141,14 @@ if ($_GET['action'] == 'payment') {
 
             move_uploaded_file($_FILES['image']['tmp_name'], $upload);
 
-            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,name_item,price_item,fullname_staff,image_history) values('$id_staff','$item','$values',NOW(),'bank','$name','$price','$fullname','$upload')";
+            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,name_item,price_item,fullname_staff,image_history,tax_setting) values('$id_staff','$item','$values',NOW(),'bank','$name','$price','$fullname','$upload',$row_setting[action_setting])";
             $result = $con->query($sql);
         }
     }
     if ($_GET['bank'] == 'cash') {
         $moneyincome = $_GET['money'];
         if ($moneyincome >= $money) {
-            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,name_item,price_item,income_history,fullname_staff) values('$id_staff','$item','$values',NOW(),'cash','$name','$price',$moneyincome,'$fullname')";
+            $sql = "INSERT INTO history(id_staff,id_item,values_item,datetime_history,transfer_history,name_item,price_item,income_history,fullname_staff,tax_setting) values('$id_staff','$item','$values',NOW(),'cash','$name','$price',$moneyincome,'$fullname',$row_setting[action_setting])";
             $result = $con->query($sql);
         } else {
             header('location: ../pages/payment.php?message=' . 'จำนวนเงินที่รับไม่ถูกต้อง');

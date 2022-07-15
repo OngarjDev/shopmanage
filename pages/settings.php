@@ -65,6 +65,7 @@
             </div>
         </main>
     </div>
+    <script src="../js/ajax/settings.js"></script>
     <?php include('../php_action/scripts.php') ?>
 </body>
 
