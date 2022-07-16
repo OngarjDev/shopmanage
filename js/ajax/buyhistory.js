@@ -7,3 +7,7 @@ function showsearch() {
         document.getElementById('input_search').setAttribute('hidden', 'True');
     }
 }
+
+function ageen(id_history) {
+    document.getElementById(id_history).removeAttribute("hidden");
+}

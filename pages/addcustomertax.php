@@ -29,7 +29,6 @@ if($result->num_rows == 0){ ///ตรวจสอบว่ามีข้อม�
                 <div class="row">
                     <div class="col-xl-1 col-lg-1 col-md-1"></div>
                     <div class="col-xl-10 col-lg-10 col-md-10">
-                        <a href="../pages/finishbuyitem.php?id_history=<?php echo $_GET['id_history']; ?>" class="btn btn-secondary">กลับไปหน้าเดิม</a>
                         <h1 class="text-center mt-3">กรอกใบภาษีแบบเต็ม</h1>
                         <div class="row g-3">
                             <label class="form-label">ชื่อ(ผู้ขอใบภาษีแบบเต็ม)</label>
