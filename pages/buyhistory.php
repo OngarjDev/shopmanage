@@ -29,7 +29,7 @@
                                 <button class="btn btn-primary w-100 mt-2" onclick="showsearch()" id="btn_search">ค้นหาสินค้าผ่านรหัส ยืนยันเลขที่</button>
                                 <div class="mt-2" id="input_search" hidden>
                                     <label>กรอกเฉพาะเลขรหัสเท่านั้น</label>
-                                    <input type="text" id="" class="form-control w-100" placeholder="ใส่เลขที่รายการเท่านั้นไม่มีเว้นวรรคไม่มีตัวอักษร">
+                                    <input type="text" id="" class="form-control w-100" onkeyup="autosearch(this.value,<?php echo $page ?>)" onkeypress="return checkenter(this.value,event,<?php echo $page ?>)" placeholder="ใส่เลขที่รายการเท่านั้นไม่มีเว้นวรรคไม่มีตัวอักษร">
                                     <button class="btn btn-primary w-100 mt-1">ยืนยันการค้นหา</button>
                                 </div>
                                 <h3 class="mt-2">คำแนะนำ</h3>
@@ -40,7 +40,7 @@
                         <?php if (isset($_GET['menu'])) : ?>
                             <?php
                             require_once('../php_action/dbconnect.php');
-                            $limititempage = 6; //จำกัดการแสดงผล 12 ชิ้นต่อ 1 หน้า
+                            $limititempage = 6; //จำกัดการแสดงผล 6 ต่อ 1 หน้า
                             if (isset($_GET['page'])) {
                                 $page = $_GET['page'];
                             } else {
