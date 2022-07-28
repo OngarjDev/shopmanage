@@ -29,8 +29,10 @@
                                 <button class="btn btn-primary w-100 mt-2" onclick="showsearch()" id="btn_search">ค้นหาสินค้าผ่านรหัส ยืนยันเลขที่</button>
                                 <div class="mt-2" id="input_search" hidden>
                                     <label>กรอกเฉพาะเลขรหัสเท่านั้น</label>
-                                    <input type="text" id="" class="form-control w-100" onkeyup="autosearch(this.value,<?php echo $page ?>)" onkeypress="return checkenter(this.value,event,<?php echo $page ?>)" placeholder="ใส่เลขที่รายการเท่านั้นไม่มีเว้นวรรคไม่มีตัวอักษร">
-                                    <button class="btn btn-primary w-100 mt-1">ยืนยันการค้นหา</button>
+                                    <form action="searchhistory.php" method="get">
+                                    <input type="text" name="keyword" class="form-control w-100" placeholder="ใส่เลขที่รายการเท่านั้นไม่มีเว้นวรรคไม่มีตัวอักษร">
+                                    <input type="submit" class="btn btn-success mt-2 w-100" value="ค้นหา">
+                                </form>
                                 </div>
                                 <h3 class="mt-2">คำแนะนำ</h3>
                                 <p>ตัวเลือก การทำรายการล่าสุดจะเห็นภายใน 24 ชั่วโมงเท่านั้น</p>
