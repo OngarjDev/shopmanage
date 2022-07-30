@@ -52,6 +52,9 @@
 
                             $sql = "SELECT * FROM history WHERE id_staff = '$id_staff' AND datetime_history > (NOW() -INTERVAL 1 DAY) ORDER BY id_history DESC LIMIT $start,$limititempage";
                             $result = $con->query($sql);
+                            if($result->num_rows == 0):
+                                echo "<h1 class='text-center'>ไม่พบรายการสินค้า<h1>";
+                            endif;
                             while ($row = $result->fetch_assoc()) :
                                 if ($row['transfer_history'] == 'cash') {
                                     $transfer = 'เงินสด';

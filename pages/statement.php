@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>เกี่ยวกับสินค้า</title>
+    <title>ประวัติการซื้อสินค้าทั้งหมด</title>
     <?php
     require('../php_action/check.php');
     include('../php_action/bootstrap.php');
@@ -16,16 +16,16 @@
     ?>
     <div id="layoutSidenav_content">
         <main>
-            <div class="container-xxl">
-                <div class="row">
-                    <div class="col-xl-4 col-lg-5 col-md-5 mt-3">
-                    </div>
-                    <div class="col-xl-8 col-lg-7 col-md-7">
-                    </div>
-                </div>
+            <div class="col-xl-2 col-lg-2 col-md-2">
+
+            </div>
+            <div class="col-xl-8 col-lg-8 col-md-8">
+                <?php if($_GET[''] == "")?>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2">
+
             </div>
         </main>
-    </div>
     </div>
     <?php include('../php_action/scripts.php') ?>
 </body>

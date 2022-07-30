@@ -24,6 +24,9 @@
                         $keyword = $_GET['keyword'];
                         $sql = "SELECT * FROM history WHERE id_history = '$keyword'";
                         $result = $con->query($sql);
+                        if ($result->num_rows == 0) :
+                            echo "<h1 class='text-center'>ไม่พบรายการสินค้า<h1>";
+                        endif;
                         while ($row = $result->fetch_assoc()) :
                             if ($row['transfer_history'] == 'cash') {
                                 $transfer = 'เงินสด';
@@ -127,4 +130,6 @@
 <?php
                             $taxsum = 0;
                         endwhile ?>
+<script src="../js/ajax/buyhistory.js"></script>
+<?php include('../php_action/scripts.php') ?>
 </body>
