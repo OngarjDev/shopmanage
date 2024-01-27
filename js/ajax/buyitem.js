@@ -31,6 +31,7 @@ function sendaddcart(keyword, page) {
     }
 };
 function deletecart(id_item, page) {
+    console.log(id_item);
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: 'btn btn-success me-2',

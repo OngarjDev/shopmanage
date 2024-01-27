@@ -160,7 +160,7 @@
                                                         <td colspan="2">รายการทั้งหมด <?= $i - 1 ?> รายการ</td>
                                                         <td class="text-center">จำนวน <?= array_sum($numberall_array) ?> ชิ้น</td>
                                                         <td colspan="2">ราคารวม <?php echo $money ?> บาท</td>
-                                                        <td><a class="btn btn-danger w-100" onclick="deleteallcart(<?= $page ?>)">นำออกทั้งหมด</a></td>
+                                                        <!-- <td><a class="btn btn-danger w-100" onclick="deleteallcart(<?= $page ?>)">นำออกทั้งหมด</a></td> -->
                                                     </tr>
                                                 </tfoot>
                                             </table>
